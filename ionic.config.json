@@ -1,0 +1,7 @@
+{
+  "name": "PlayWords",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
