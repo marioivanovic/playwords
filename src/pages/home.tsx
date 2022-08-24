@@ -13,8 +13,21 @@ import "./home.css";
 import data from "../Data.json";
 import { useEffect, useState } from "react";
 
-
 const Home: React.FC = () => {
+
+  const rows = [];
+
+  for (let row = 0; row < 6; row++) {
+    let cols = [];
+    for (let col = 0; col < 7; col++) {
+      cols.push({ key: "", value: "" });
+    }
+    rows.push(cols);
+  }
+
+  console.log(rows);
+  let datass = data;
+  console.log(datass.data);
   const clavier = [
     { key: "A", className: "" },
     { key: "B", className: "" },
@@ -41,7 +54,7 @@ const Home: React.FC = () => {
     { key: "W", className: "" },
     { key: "X", className: "" },
     { key: "Y", className: "" },
-    { key: "Z", className: "" }
+    { key: "Z", className: "" },
   ];
   const arrayA = [
     [
@@ -103,7 +116,7 @@ const Home: React.FC = () => {
     arrI.splice(randomValueIndex, 1);
     setRandom(wordOfItemInMyArray);
   };
-
+  
   return (
     <IonPage>
       <IonHeader>
@@ -118,38 +131,19 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonGrid>
-          <IonRow>
-            <IonCol>
-              <IonButton></IonButton>
-            </IonCol>
-            <IonCol>
-              <IonButton></IonButton>
-            </IonCol>
-            <IonCol>
-              <IonButton></IonButton>
-            </IonCol>
-          </IonRow>
-
-          <IonRow>
-            <IonCol>
-              <IonButton></IonButton>
-            </IonCol>
-            <IonCol>
-              <IonButton></IonButton>
-            </IonCol>
-            <IonCol>
-              <IonButton></IonButton>
-            </IonCol>
-            <IonCol>
-              <IonButton></IonButton>
-            </IonCol>
-            <IonCol>
-              <IonButton></IonButton>
-            </IonCol>
-            <IonCol>
-              <IonButton></IonButton>
-            </IonCol>
-          </IonRow>
+          {rows.length > 0
+            ? rows.map((row, index) => (
+                <IonRow key={index}>
+                  {row.length > 0
+                    ? row.map((col, i) => (
+                        <IonCol key={i}>
+                          <IonButton>A</IonButton>
+                        </IonCol>
+                      ))
+                    : null}
+                </IonRow>
+              ))
+            : null}
         </IonGrid>
         <h1>Le mot a deviner est : {random}</h1>
 
