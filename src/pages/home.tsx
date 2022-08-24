@@ -25,9 +25,7 @@ const Home: React.FC = () => {
     rows.push(cols);
   }
 
-  console.log(rows);
   let datass = data;
-  console.log(datass.data);
   const clavier = [
     { key: "A", className: "" },
     { key: "B", className: "" },
@@ -102,6 +100,7 @@ const Home: React.FC = () => {
   ];
   let datas = data.data;
   const [arrI, setArrI] = useState([...datas]);
+  const [press, setPress] = useState("");
   const [random, setRandom] = useState("");
 
   useEffect(() => {
@@ -116,7 +115,12 @@ const Home: React.FC = () => {
     arrI.splice(randomValueIndex, 1);
     setRandom(wordOfItemInMyArray);
   };
-  
+
+  const handleClick = (event:any)=>{
+    console.log(event.target.innerText);
+    setPress(event.target.innerText);
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -137,7 +141,7 @@ const Home: React.FC = () => {
                   {row.length > 0
                     ? row.map((col, i) => (
                         <IonCol key={i}>
-                          <IonButton>A</IonButton>
+                          <IonButton onClick={handleClick} >A</IonButton>
                         </IonCol>
                       ))
                     : null}
@@ -146,6 +150,7 @@ const Home: React.FC = () => {
             : null}
         </IonGrid>
         <h1>Le mot a deviner est : {random}</h1>
+        <h1>Le mot a presser est : {press}</h1>
 
       </IonContent>
     </IonPage>
