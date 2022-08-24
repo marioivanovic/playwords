@@ -12,8 +12,10 @@ import {
 import "./home.css";
 import Keyboard from "./../components/keyboard";
 import data from "../Data.json";
+import { useEffect, useState } from "react";
 
 const Home: React.FC = () => {
+
   const rows = [];
 
   for (let row = 0; row < 6; row++) {
@@ -71,7 +73,23 @@ const Home: React.FC = () => {
       { key: "", value: "" },
     ],
   ];
+  let datas = data.data;
+  const [arrI, setArrI] = useState([...datas]);
+  const [random, setRandom] = useState("");
 
+  useEffect(() => {
+    randomValueFromArray();
+  }, []);
+
+
+  const randomValueFromArray = () => {
+    let randomValueIndex = Math.floor(Math.random() * arrI.length);
+    let wordOfItemInMyArray = arrI[randomValueIndex];
+
+    arrI.splice(randomValueIndex, 1);
+    setRandom(wordOfItemInMyArray);
+  };
+  
   return (
     <IonPage>
       <IonHeader>
@@ -101,9 +119,11 @@ const Home: React.FC = () => {
             : null}
         </IonGrid>
 
+
         {/* <Keyboard arrayProps={clavier.top} />
         <Keyboard arrayProps={clavier.middle} />
         <Keyboard arrayProps={clavier.bottom} /> */}
+
       </IonContent>
     </IonPage>
   );
