@@ -2,7 +2,11 @@ import {
   IonContent,
   IonHeader,
   IonPage,
+  IonGrid,
+  IonRow,
+  IonCol,
   IonTitle,
+  IonButton,
   IonToolbar,
 } from "@ionic/react";
 import "./home.css";
@@ -21,21 +25,40 @@ const Home: React.FC = () => {
             <IonTitle size="large">Tab 2</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonContent>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <div>1 of 3</div>
-              </ion-col>
-              <ion-col>
-                <div>2 of 3</div>
-              </ion-col>
-              <ion-col>
-                <div>3 of 3</div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </IonContent>
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonButton></IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton></IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton></IonButton>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
+            <IonCol>
+              <IonButton></IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton></IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton></IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton></IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton></IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton></IonButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
