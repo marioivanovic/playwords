@@ -1,0 +1,13 @@
+.keyboard-container{
+
+}
+.keyboard-container-flex{
+    display: flex;
+    justify-content: center;
+}
+.keyboard-col{
+    margin: 0 1px;
+}
+.keyboard-button{
+    
+}
