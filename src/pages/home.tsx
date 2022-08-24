@@ -11,11 +11,10 @@ import {
 } from "@ionic/react";
 import "./home.css";
 import data from "../Data.json";
+import { useEffect, useState } from "react";
 
 
 const Home: React.FC = () => {
-  let datass = data;
-  console.log(datass.data);
   const clavier = [
     { key: "A", className: "" },
     { key: "B", className: "" },
@@ -88,7 +87,22 @@ const Home: React.FC = () => {
       { key: "", value: "" },
     ],
   ];
+  let datas = data.data;
+  const [arrI, setArrI] = useState([...datas]);
+  const [random, setRandom] = useState("");
 
+  useEffect(() => {
+    randomValueFromArray();
+  }, []);
+
+
+  const randomValueFromArray = () => {
+    let randomValueIndex = Math.floor(Math.random() * arrI.length);
+    let wordOfItemInMyArray = arrI[randomValueIndex];
+
+    arrI.splice(randomValueIndex, 1);
+    setRandom(wordOfItemInMyArray);
+  };
 
   return (
     <IonPage>
@@ -137,6 +151,8 @@ const Home: React.FC = () => {
             </IonCol>
           </IonRow>
         </IonGrid>
+        <h1>Le mot a deviner est : {random}</h1>
+
       </IonContent>
     </IonPage>
   );
