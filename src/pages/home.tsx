@@ -10,50 +10,29 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./home.css";
+import Keyboard from "./../components/keyboard";
 import data from "../Data.json";
+import claviers from "../keyboards.json";
 
 const Home: React.FC = () => {
   const rows = [];
 
   for (let row = 0; row < 6; row++) {
     let cols = [];
-    for (let col = 0; col < 7; col++) {
+    for (let col = 0; col < 5; col++) {
       cols.push({ key: "", value: "" });
     }
     rows.push(cols);
   }
 
-  console.log(rows);
+  // console.log(rows);
   let datass = data;
-  console.log(datass.data);
-  const clavier = [
-    { key: "A", className: "" },
-    { key: "B", className: "" },
-    { key: "C", className: "" },
-    { key: "D", className: "" },
-    { key: "E", className: "" },
-    { key: "F", className: "" },
-    { key: "G", className: "" },
-    { key: "H", className: "" },
-    { key: "I", className: "" },
-    { key: "J", className: "" },
-    { key: "K", className: "" },
-    { key: "L", className: "" },
-    { key: "M", className: "" },
-    { key: "N", className: "" },
-    { key: "O", className: "" },
-    { key: "P", className: "" },
-    { key: "Q", className: "" },
-    { key: "R", className: "" },
-    { key: "S", className: "" },
-    { key: "T", className: "" },
-    { key: "U", className: "" },
-    { key: "V", className: "" },
-    { key: "W", className: "" },
-    { key: "X", className: "" },
-    { key: "Y", className: "" },
-    { key: "Z", className: "" },
-  ];
+  // console.log(datass.data);
+
+  // keyboard.map((clavier, key) => {
+  //     console.log(clavier[key]);
+
+  // });
   const arrayA = [
     [
       { key: "", value: "" },
@@ -119,7 +98,7 @@ const Home: React.FC = () => {
                   {row.length > 0
                     ? row.map((col, i) => (
                         <IonCol key={i}>
-                          <IonButton>A</IonButton>
+                          <IonButton></IonButton>
                         </IonCol>
                       ))
                     : null}
@@ -127,6 +106,9 @@ const Home: React.FC = () => {
               ))
             : null}
         </IonGrid>
+        <Keyboard />
+        {/* <Keyboard/>
+        <Keyboard/> */}
       </IonContent>
     </IonPage>
   );
