@@ -7,14 +7,14 @@ const Keyboard: React.FC = () => {
   //   const keyboardTable = document.getElementsByClassName("keyboard-container");
   //   const letters = keyboardTable[0].innerHTML;
   //   function displayLetters() {
-  keyboards.clavier
-    .map((keyboard) => {
-      document.getElementsByClassName("keyboard-container")[0].innerHTML += `
-            <IonButton>${keyboard.top}</IonButton>
-            <IonButton>${keyboard.middle}</IonButton>
-            <IonButton>${keyboard.bottom}</IonButton>`;
-    })
-    .join("");
+  // keyboards.clavier
+  //   .map((keyboard) => {
+  //     document.getElementsByClassName("keyboard-container")[0].innerHTML += `
+  //           <IonButton>${keyboard.top}</IonButton>
+  //           <IonButton>${keyboard.middle}</IonButton>
+  //           <IonButton>${keyboard.bottom}</IonButton>`;
+  //   })
+  //   .join("");
   //   }
   //   displayLetters();
 

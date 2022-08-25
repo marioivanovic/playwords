@@ -7,6 +7,23 @@ ion-grid{
     background: blue;
 }
 
+.legend-container{
+    display: flex;
+    margin: 5px;
+}
+
+.success{
+    background: #4AD66D;
+}
+
+.misplaced{
+    background: #FFB700;
+}
+
+.failed{
+    background: #DA1E37;
+}
+
 .ion-button{
     height:40px;
     width: 90px;

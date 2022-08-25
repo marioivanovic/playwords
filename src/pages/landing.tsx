@@ -15,7 +15,7 @@ import {
 } from "@ionic/react";
 import "./landing.css";
 
-import { Gamers, UsersContextConsumer } from "./../services/storage.services";
+import { Gamers, GamersContextConsumer } from "./../services/storage.services";
 
 const Landing: React.FC = () => {
   var pseudo: string;
@@ -72,8 +72,11 @@ const Landing: React.FC = () => {
                         <IonCol key={i}>
                           {legends.length > 0
                             ? legends.map((legend, i) => (
-                                <div className="legend ${legend.status}">
-                                  ${legend.description}
+                                <div className="legend-container">
+                                  <div className="legend {legend.status}"></div>
+                                  <div className="legend-description">
+                                    {legend.description}
+                                  </div>
                                 </div>
                               ))
                             : null}
@@ -84,7 +87,7 @@ const Landing: React.FC = () => {
               ))
             : null}
         </IonGrid>
-        <UsersContextConsumer>
+        <GamersContextConsumer>
           {(context: Gamers) => (
             <IonButton
               color="medium"
@@ -110,7 +113,7 @@ const Landing: React.FC = () => {
               <Link to="/home">Jouer</Link>
             </IonButton>
           )}
-        </UsersContextConsumer>
+        </GamersContextConsumer>
       </IonContent>
     </IonPage>
   );
