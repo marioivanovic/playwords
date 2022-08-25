@@ -31,7 +31,6 @@ const Home: React.FC = () => {
     ["Enter", "B", "M", "N", "V", "C", "Z", "X", "Reset"],
   ];
   const rows = [];
-
   for (let row = 0; row < 6; row++) {
     let cols = [];
     for (let col = 0; col < 5; col++) {
@@ -91,6 +90,7 @@ const Home: React.FC = () => {
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
   const [is, setIS] = useState(false);
+  const [isCompare, setIsCompare] = useState(false);
   let nbrRoWord = 0;
   // let col = 0;
   // let row = 0;
@@ -147,18 +147,15 @@ const Home: React.FC = () => {
   };
 
   const Ionchange = (event: any) => {
-    let currentMatrice = [...board];
     console.log("onchange", board);
-
-    // console.log(matrice[index][i].value)
-    // matrice[index][i].value=event.detail.value;
-    // matrice[index][i].disabled=true;
-    // matrice[index][i+1].disabled=false;
-    // console.log(matrice[index][i].value)
   };
 
-  const prev = (event: any) => {
-    console.log(event);
+  const prev = () => {
+    console.log(board[row][col-1]);
+    let copyBoard=[...board];
+    copyBoard[row][col-1].value="";
+    setCol(col-1);
+    setBoard(copyBoard);
   };
 
   const compare = (event: any) => {
@@ -179,21 +176,8 @@ const Home: React.FC = () => {
         col.color="ionColGreen"
       });
       setBoard(copyBoard);
-      console.log(board)
     } else {
       let copyBoard =[...board]
-      // copyBoard[row-1].forEach((col)=>{
-      //   col.color="ionColGreen"
-      // });
-      // setBoard(copyBoard);
-      console.log(board)
-      let arrTest = document.querySelector(`#id-${row - 1}`);
-      let item1 =document.querySelector(`#id-${row - 1}-${col}`);
-      let item2=document.querySelector(`#id-${row - 1}-${col}`);
-      let item3 =document.querySelector(`#id-${row - 1}-${col}`);
-      let item4 =document.querySelector(`#id-${row - 1}-${col}`);
-      let item5 =document.querySelector(`#id-${row - 1}-${col}`);
-      
       let arrayValue = arrayToString.split("");
       let arrayWord = random.split("");
       for (let i = 0; i < arrayValue.length; i++) {
@@ -205,8 +189,6 @@ const Home: React.FC = () => {
               if (
                 worldSplit.toLocaleUpperCase() === strSplit.toLocaleUpperCase()
               ) {
-                console.log("color green ", strSplit, worldSplit);
-                console.log("board lettre", board[row-1][i]);
                 copyBoard[row-1][i].color='ionColGreen';
                 setBoard(copyBoard);
               }
@@ -215,8 +197,6 @@ const Home: React.FC = () => {
                   strSplit.toLocaleUpperCase() &&
                 random.includes(strSplit.toUpperCase())
               ) {
-                console.log("color orange ", strSplit, worldSplit);
-                console.log("board lettre", board[row-1][i]);
                 copyBoard[row-1][i].color='ionColOrange';
                 setBoard(copyBoard);
               }
@@ -225,8 +205,6 @@ const Home: React.FC = () => {
         } else {
           copyBoard[row-1][i].color='ionColRed';
           setBoard(copyBoard);
-          console.log("rouge", strSplit);
-          console.log("board lettre", copyBoard[row-1][i]);
         }
       }
     }
@@ -290,9 +268,8 @@ const Home: React.FC = () => {
                     </IonButton>
                   ) : null}
                   {keyValue === "Reset" ? (
-                    <IonButton color={"danger"}>
+                    <IonButton color={"danger"} onClick={prev}>
                       <IonIcon
-                        onClick={prev}
                         size="small"
                         // color="danger"
                         className="keyboard-button"
