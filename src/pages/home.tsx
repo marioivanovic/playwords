@@ -8,19 +8,13 @@ import {
   IonTitle,
   IonButton,
   IonToolbar,
-  IonFabButton,
-  IonItem,
-  IonInput,
   IonIcon,
 } from "@ionic/react";
 import "./home.css";
-import Keyboard from "./../components/keyboard";
 import data from "../Data.json";
 import { useEffect, useState } from "react";
 import "../components/keyboard.css";
-import clavier from "./../keyboards.json";
 import { IInputCol } from "../components/IInputCol";
-import { Matrice } from "../components/Matrice";
 import { backspace, refreshCircle } from "ionicons/icons";
 import "../components/styles.css";
 
@@ -90,8 +84,6 @@ const Home: React.FC = () => {
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
   const [is, setIS] = useState(false);
-  const [isCompare, setIsCompare] = useState(false);
-  let nbrRoWord = 0;
   useEffect(() => {
     randomValueFromArray();
   }, [is]);
@@ -231,24 +223,20 @@ const Home: React.FC = () => {
                 <IonRow key={index} id={"id-" + index}>
                   {row.length > 0
                     ? row.map((col, i) => (
-                        // <IonCol key={i} size="2" id={"id-" + index + "-" + i}>
                         <div className={col.color} key={i}>
                           <IInputCol
-                            // color="warning"
                             key={i}
                             id={"id-" + index + "-" + i}
                             value={col.value}
                             onIonChange={Ionchange}
                           />
                         </div>
-                        // </IonCol>
                       ))
                     : null}
                 </IonRow>
               ))
             : null}
         </IonGrid>
-        {/* <Matrice /> */}
 
         <div className="keyboard-container">
           {arrayObject.map((a, index) => (
@@ -298,7 +286,6 @@ const Home: React.FC = () => {
           </IonButton>
         </div>
         <h1 className="ioncol">Le mot à trouver est : {random}</h1>
-        {/* <h1>Le mot a presser est : {press}</h1> */}
       </IonContent>
     </IonPage>
   );
