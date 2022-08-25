@@ -107,7 +107,6 @@ const Home: React.FC = () => {
   };
 
   const handleClick = (event: any) => {
-    console.log("row col", row, col);
 
     let currentMatrice = [...board];
     if (row === 0) {
@@ -139,19 +138,16 @@ const Home: React.FC = () => {
     }
     currentMatrice[row][col].disabled = true;
     currentMatrice[row][col < 4 ? col + 1 : col].disabled = false;
-    console.log(currentMatrice);
-    console.log(row, col);
     setBoard(currentMatrice);
     boardDefault = currentMatrice;
     setPress(event.target.innerText);
   };
 
   const Ionchange = (event: any) => {
-    console.log("onchange", board);
+    // console.log("onchange", board);
   };
 
   const prev = () => {
-    console.log(board[row][col-1]);
     let copyBoard=[...board];
     copyBoard[row][col-1].value="";
     setCol(col-1);
@@ -160,13 +156,12 @@ const Home: React.FC = () => {
 
   const compare = (event: any) => {
     let valid = false;
-    console.log(board[0][0].value);
     let arrayToString =
-      board[0][0].value +
-      board[0][1].value +
-      board[0][2].value +
-      board[0][3].value +
-      board[0][4].value;
+      board[row-1][0].value +
+      board[row-1][1].value +
+      board[row-1][2].value +
+      board[row-1][3].value +
+      board[row-1][4].value;
     console.log(arrayToString, random);
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
       console.log("le mot est green");
@@ -176,6 +171,7 @@ const Home: React.FC = () => {
         col.color="ionColGreen"
       });
       setBoard(copyBoard);
+      console.log(board)
     } else {
       let copyBoard =[...board]
       let arrayValue = arrayToString.split("");
@@ -208,6 +204,7 @@ const Home: React.FC = () => {
         }
       }
     }
+
   };
 
   const reset = (event: any) => {
