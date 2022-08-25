@@ -1,10 +1,19 @@
 import { IonItem, IonInput } from "@ionic/react"
 
-export const IInputCol = (props:{value: string, onIonChange: any}) => {
-    const {value, onIonChange} = props;
+export const IInputCol = (props:{value: string, onIonChange: any, id: string, 
+    // color: string
+}) => {
+    const {value, onIonChange, id, 
+        // color
+    } = props;
+    // <IonItem id={id} 
+    // color={'dark'}
+    // color={color}
+    //  >
+        {/* </IonItem> */}
     return(
-        <IonItem>
+        <div id={id}>
             <IonInput value={value} onIonChange={onIonChange} size={1} maxlength={1}></IonInput>
-        </IonItem>
+        </div>
     );
 };
