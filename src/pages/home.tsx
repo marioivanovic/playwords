@@ -114,10 +114,8 @@ const Home: React.FC = () => {
         const el = currentMatrice[0][i];
         if (i === col) {
           el.value = event.target.innerText;
-
         }
       }
-
     } else {
       for (let index = 0; index < currentMatrice.length; index++) {
         const element = currentMatrice[index];
@@ -126,19 +124,17 @@ const Home: React.FC = () => {
             const el = element[i];
             if (i === col) {
               el.value = event.target.innerText;
-
-              // col++;
             }
           }
-          // row++;
         }
       }
     }
-    if (col < 5) {
+    if (col < 4) {
       setCol(col+1);
     }
-    if (col === 5) {
+    if (col === 4) {
       setRow(row+1);
+      setCol(0)
     }
     currentMatrice[row][col].disabled = true;
     currentMatrice[row][col <4?col + 1:col].disabled = false;
