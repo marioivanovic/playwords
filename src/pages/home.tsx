@@ -207,7 +207,8 @@ const Home: React.FC = () => {
               ) {
                 console.log("color green ", strSplit, worldSplit);
                 console.log("board lettre", board[row-1][i]);
-
+                copyBoard[row-1][i].color='ionColGreen';
+                setBoard(copyBoard);
               }
               if (
                 worldSplit.toLocaleUpperCase() !==
@@ -216,7 +217,8 @@ const Home: React.FC = () => {
               ) {
                 console.log("color orange ", strSplit, worldSplit);
                 console.log("board lettre", board[row-1][i]);
-
+                copyBoard[row-1][i].color='ionColOrange';
+                setBoard(copyBoard);
               }
             }
           }
