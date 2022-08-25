@@ -21,8 +21,8 @@ import "../components/keyboard.css";
 import clavier from "./../keyboards.json";
 import { IInputCol } from "../components/IInputCol";
 import { Matrice } from "../components/Matrice";
-import { backspace } from "ionicons/icons";
-import '../components/styles.css'
+import { backspace, refreshCircle } from "ionicons/icons";
+import "../components/styles.css";
 
 const Home: React.FC = () => {
   const arrayObject = [
@@ -92,8 +92,6 @@ const Home: React.FC = () => {
   const [is, setIS] = useState(false);
   const [isCompare, setIsCompare] = useState(false);
   let nbrRoWord = 0;
-  // let col = 0;
-  // let row = 0;
   useEffect(() => {
     randomValueFromArray();
   }, [is]);
@@ -107,7 +105,6 @@ const Home: React.FC = () => {
   };
 
   const handleClick = (event: any) => {
-
     let currentMatrice = [...board];
     if (row === 0) {
       for (let i = 0; i < currentMatrice[0].length; i++) {
@@ -148,32 +145,33 @@ const Home: React.FC = () => {
   };
 
   const prev = () => {
-    let copyBoard=[...board];
-    copyBoard[row][col-1].value="";
-    setCol(col-1);
+    let copyBoard = [...board];
+    copyBoard[row][col - 1].value = "";
+    setCol(col - 1);
     setBoard(copyBoard);
+    setIS(true);
   };
 
   const compare = (event: any) => {
     let valid = false;
     let arrayToString =
-      board[row-1][0].value +
-      board[row-1][1].value +
-      board[row-1][2].value +
-      board[row-1][3].value +
-      board[row-1][4].value;
+      board[row - 1][0].value +
+      board[row - 1][1].value +
+      board[row - 1][2].value +
+      board[row - 1][3].value +
+      board[row - 1][4].value;
     console.log(arrayToString, random);
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
       console.log("le mot est green");
       valid = true;
-      let copyBoard =[...board]
-      copyBoard[row-1].forEach((col)=>{
-        col.color="ionColGreen"
+      let copyBoard = [...board];
+      copyBoard[row - 1].forEach((col) => {
+        col.color = "ionColGreen";
       });
       setBoard(copyBoard);
-      console.log(board)
+      console.log(board);
     } else {
-      let copyBoard =[...board]
+      let copyBoard = [...board];
       let arrayValue = arrayToString.split("");
       let arrayWord = random.split("");
       for (let i = 0; i < arrayValue.length; i++) {
@@ -185,7 +183,7 @@ const Home: React.FC = () => {
               if (
                 worldSplit.toLocaleUpperCase() === strSplit.toLocaleUpperCase()
               ) {
-                copyBoard[row-1][i].color='ionColGreen';
+                copyBoard[row - 1][i].color = "ionColGreen";
                 setBoard(copyBoard);
               }
               if (
@@ -193,22 +191,25 @@ const Home: React.FC = () => {
                   strSplit.toLocaleUpperCase() &&
                 random.includes(strSplit.toUpperCase())
               ) {
-                copyBoard[row-1][i].color='ionColOrange';
+                copyBoard[row - 1][i].color = "ionColOrange";
                 setBoard(copyBoard);
               }
             }
           }
         } else {
-          copyBoard[row-1][i].color='ionColRed';
+          copyBoard[row - 1][i].color = "ionColRed";
           setBoard(copyBoard);
         }
       }
     }
-
   };
 
   const reset = (event: any) => {
     console.log(event);
+    setBoard(boardDefault);
+    setCol(0);
+    setRow(0);
+    randomValueFromArray();
   };
 
   return (
@@ -233,13 +234,13 @@ const Home: React.FC = () => {
                         // <IonCol key={i} size="2" id={"id-" + index + "-" + i}>
                         <div className={col.color}>
                           <IInputCol
-                          // color="warning"
-                          key={i}
+                            // color="warning"
+                            key={i}
                             id={"id-" + index + "-" + i}
                             value={col.value}
                             onIonChange={Ionchange}
                           />
-                          </div>
+                        </div>
                         // </IonCol>
                       ))
                     : null}
@@ -288,6 +289,14 @@ const Home: React.FC = () => {
               ))}
             </IonRow>
           ))}
+
+          <IonButton color={"danger"} onClick={reset}>
+            <IonIcon
+              size="small"
+              className="keyboard-button"
+              icon={refreshCircle}
+            />
+          </IonButton>
         </div>
         <h1 className="ioncol">Le mot a deviner est : {random}</h1>
         {/* <h1>Le mot a presser est : {press}</h1> */}
