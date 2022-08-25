@@ -232,7 +232,7 @@ const Home: React.FC = () => {
                   {row.length > 0
                     ? row.map((col, i) => (
                         // <IonCol key={i} size="2" id={"id-" + index + "-" + i}>
-                        <div className={col.color}>
+                        <div className={col.color} key={i}>
                           <IInputCol
                             // color="warning"
                             key={i}
@@ -292,13 +292,12 @@ const Home: React.FC = () => {
 
           <IonButton color={"danger"} onClick={reset}>
             <IonIcon
-              size="small"
               className="keyboard-button"
               icon={refreshCircle}
             />
           </IonButton>
         </div>
-        <h1 className="ioncol">Le mot a deviner est : {random}</h1>
+        <h1 className="ioncol">Le mot à trouver est : {random}</h1>
         {/* <h1>Le mot a presser est : {press}</h1> */}
       </IonContent>
     </IonPage>
