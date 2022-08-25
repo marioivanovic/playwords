@@ -180,10 +180,13 @@ const Home: React.FC = () => {
       });
       setBoard(copyBoard);
       console.log(board)
-
     } else {
-      let arrayValue = arrayToString.split("");
-      let arrayTest = random.split("");
+      let copyBoard =[...board]
+      // copyBoard[row-1].forEach((col)=>{
+      //   col.color="ionColGreen"
+      // });
+      // setBoard(copyBoard);
+      console.log(board)
       let arrTest = document.querySelector(`#id-${row - 1}`);
       let item1 =document.querySelector(`#id-${row - 1}-${col}`);
       let item2=document.querySelector(`#id-${row - 1}-${col}`);
@@ -191,18 +194,20 @@ const Home: React.FC = () => {
       let item4 =document.querySelector(`#id-${row - 1}-${col}`);
       let item5 =document.querySelector(`#id-${row - 1}-${col}`);
       
-      console.log("first", item1);
-
+      let arrayValue = arrayToString.split("");
+      let arrayWord = random.split("");
       for (let i = 0; i < arrayValue.length; i++) {
         const strSplit = arrayValue[i];
         if (random.includes(strSplit.toUpperCase())) {
-          for (let index = 0; index < arrayTest.length; index++) {
-            const worldSplit = arrayTest[index];
+          for (let index = 0; index < arrayWord.length; index++) {
+            const worldSplit = arrayWord[index];
             if (index === i) {
               if (
                 worldSplit.toLocaleUpperCase() === strSplit.toLocaleUpperCase()
               ) {
                 console.log("color green ", strSplit, worldSplit);
+                console.log("board lettre", board[row-1][i]);
+
               }
               if (
                 worldSplit.toLocaleUpperCase() !==
@@ -210,11 +215,16 @@ const Home: React.FC = () => {
                 random.includes(strSplit.toUpperCase())
               ) {
                 console.log("color orange ", strSplit, worldSplit);
+                console.log("board lettre", board[row-1][i]);
+
               }
             }
           }
         } else {
+          copyBoard[row-1][i].color='ionColRed';
+          setBoard(copyBoard);
           console.log("rouge", strSplit);
+          console.log("board lettre", copyBoard[row-1][i]);
         }
       }
     }
