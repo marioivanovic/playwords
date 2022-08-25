@@ -41,46 +41,46 @@ const Home: React.FC = () => {
   }
   let boardDefault = [
     [
-      { value: "", disabled: false, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
+      { value: "", disabled: false, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
-      { value: "", disabled: true, color: "" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
+      { value: "", disabled: true, color: "ioncol" },
     ],
   ];
   const [board, setBoard] = useState([...boardDefault]);
@@ -174,8 +174,12 @@ const Home: React.FC = () => {
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
       console.log("le mot est green");
       valid = true;
-      let r = document.getElementById(`id-${row - 1}-${col}`)
-      console.log(r)
+      let copyBoard =[...board]
+      copyBoard[row-1].forEach((col)=>{
+        col.color="ionColGreen"
+      });
+      setBoard(copyBoard);
+      console.log(board)
 
     } else {
       let arrayValue = arrayToString.split("");
@@ -240,7 +244,7 @@ const Home: React.FC = () => {
                   {row.length > 0
                     ? row.map((col, i) => (
                         // <IonCol key={i} size="2" id={"id-" + index + "-" + i}>
-                        <div className="ioncol">
+                        <div className={col.color}>
                           <IInputCol
                           // color="warning"
                           key={i}
