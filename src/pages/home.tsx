@@ -9,16 +9,23 @@ import {
   IonButton,
   IonToolbar,
   IonIcon,
+  IonButtons,
+  IonModal,
+  useIonAlert,
+  IonAlert,
 } from "@ionic/react";
 import "./home.css";
 import data from "../Data.json";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../components/keyboard.css";
 import { IInputCol } from "../components/IInputCol";
 import { backspace, refreshCircle } from "ionicons/icons";
 import "../components/styles.css";
+import AlertIon from "../components/AlertIon";
+import ModalInfo from "../components/ModalInfo";
 
 const Home: React.FC = () => {
+  const modal = useRef<HTMLIonModalElement>(null);
   const arrayObject = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -86,8 +93,11 @@ const Home: React.FC = () => {
   const [is, setIS] = useState(false);
   const [wordsFind, setWordsFind] = useState([]);
   const [isRefrech, setIsrefrech] = useState(false);
+  const [isShow, setIsShow] = useState(false);
   const [str, setStr] = useState("");
   const [nbrTest, setNbrTest] = useState(0);
+  const [presentAlert] = useIonAlert();
+
 
   useEffect(() => {
     randomValueFromArray();
@@ -158,7 +168,7 @@ const Home: React.FC = () => {
     }
   };
   const nbre_caracteres = (lettre: string, mot: string) => {
-    console.log(mot)
+    console.log(mot);
     let mots = mot.split("");
     var nbre_de_fois_trouve = 0;
 
@@ -202,46 +212,30 @@ const Home: React.FC = () => {
               ) {
                 copyBoard[row - 1][i].color = "ionColGreen";
                 setBoard(copyBoard);
-              }else{
-
+              } else {
                 if (
                   worldSplit.toLocaleUpperCase() !==
                     strSplit.toLocaleUpperCase() &&
                   random.includes(strSplit.toUpperCase())
                 ) {
-  
                   let letterRepeatRandom = nbre_caracteres(strSplit, random);
-                  let letterRepeatV = nbre_caracteres(strSplit, arrayToString);
-                  console.log("nbr repeat",letterRepeatRandom);
-                  console.log("nbr repeat value",letterRepeatV);
-                  console.log("index", index)
-                  console.log("arrayWord", arrayWord)
-                  console.log("wordSpliit", worldSplit)
                   let nb = 0;
-  
-  
+
                   for (let j = 0; j < arrayValue.length; j++) {
                     const jStr = arrayValue[j];
-                    console.log("jstr dans la boucle", jStr)
-                    console.log("jstrsplit", strSplit)
                     if (strSplit === jStr) {
-                      console.log("nbr ++")
                       nb++;
                     }
-                    if (nb>letterRepeatRandom) {
-                      console.log("ionColRed")
+                    if (nb > letterRepeatRandom) {
                       copyBoard[row - 1][i].color = "ionColRed";
                       setBoard(copyBoard);
                     }
                   }
-  
-  
+
                   if (nb <= letterRepeatRandom) {
-                    console.log("ionColOrange")
                     copyBoard[row - 1][i].color = "ionColOrange";
                     setBoard(copyBoard);
-                  }else{
-                    console.log("ionColRed")
+                  } else {
                     copyBoard[row - 1][i].color = "ionColRed";
                     setBoard(copyBoard);
                   }
@@ -263,14 +257,16 @@ const Home: React.FC = () => {
       if (valid) {
         result = "Felicitations c'etait moin une !!!!!";
       } else {
-        result = "Dommage, loose";
+        result = "Dommage, loose, Vous avez perdu";
       }
+      setIsShow(true);
       setIsrefrech(true);
     }
 
     if (nbrTest < 5) {
       if (valid) {
         result = "Felicitations !!!!!";
+        setIsShow(true);
       } else {
         result = "Dommage, loose Vous pouvez reessayez encore";
       }
@@ -287,6 +283,10 @@ const Home: React.FC = () => {
     randomValueFromArray();
   };
 
+
+
+
+  console.log(isShow);
   return (
     <IonPage>
       <IonHeader>
@@ -301,7 +301,23 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <h1 className="ioncol">{str}</h1>
+        <h1 className="ioncol">Le mot à trouver est : {random}</h1>
 
+        <IonAlert
+        isOpen={isShow}
+        onDidDismiss={() => setIsShow(false)}
+        header="Alert"
+        subHeader="Important message"
+        message="This is an alert!"
+        buttons={['OK']}
+      />
+        {/* {isShow ? ( presentAlert({
+          header: 'Alert',
+          subHeader: 'Important message',
+          message: str,
+          buttons: ['OK'],
+        })) : null} */}
+        {/* grid */}
         <IonGrid>
           {board.length > 0
             ? board.map((row, index) => (
@@ -322,7 +338,7 @@ const Home: React.FC = () => {
               ))
             : null}
         </IonGrid>
-
+{/* clavier */}
         <div className="keyboard-container">
           {arrayObject.map((a, index) => (
             <IonRow key={index} className="keyboard-container-flex">
@@ -367,7 +383,6 @@ const Home: React.FC = () => {
             <IonIcon className="keyboard-button" icon={refreshCircle} />
           </IonButton>
         </div>
-        <h1 className="ioncol">Le mot à trouver est : {random}</h1>
       </IonContent>
     </IonPage>
   );
