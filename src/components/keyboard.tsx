@@ -1,3 +1,4 @@
+
 import { IonButton, IonCol, IonContent, IonRow } from "@ionic/react";
 import { useState } from "react";
 import '../components/keyboard.css'
@@ -34,5 +35,3 @@ const Keyboard: React.FC = () => {
 };
 
 export default Keyboard;
-
-

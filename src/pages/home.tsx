@@ -11,6 +11,7 @@ import {
   IonIcon,
 } from "@ionic/react";
 import "./home.css";
+import Keyboard from "./../components/keyboard";
 import data from "../Data.json";
 import { useEffect, useState } from "react";
 import "../components/keyboard.css";
@@ -32,6 +33,7 @@ const Home: React.FC = () => {
     }
     rows.push(cols);
   }
+
   let boardDefault = [
     [
       { value: "", disabled: false, color: "ioncol" },
@@ -206,11 +208,6 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -237,7 +234,6 @@ const Home: React.FC = () => {
               ))
             : null}
         </IonGrid>
-
         <div className="keyboard-container">
           {arrayObject.map((a, index) => (
             <IonRow key={index} className="keyboard-container-flex">
