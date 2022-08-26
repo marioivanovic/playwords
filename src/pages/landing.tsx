@@ -27,8 +27,6 @@ const Landing: React.FC = () => {
     localStorage.setItem("pseudo", JSON.stringify(gamer));
   };
 
-  // localStorage.getItem("pseudo");
-
   const rows = [];
   const legends = [
     {

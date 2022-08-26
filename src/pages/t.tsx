@@ -72,7 +72,6 @@ import {
     };
   
     const handleClick = (event: any) => {
-      console.log(event.target.id);
       setPress(event.target.innerText);
       setCurrentId(event.target.id)
       enterOn(event.target.id, event.target.innerText);
@@ -83,7 +82,6 @@ import {
       let test = boardDefault[currentPos.row][currentPos.col];
       test = value;
       setBoard(boardDefault);
-      console.log(boardDefault);
       setPress(value);
       board.forEach((arr)=>{
       for (let index = 0; index < board.length; index++) {
@@ -110,9 +108,7 @@ import {
       for (let i = 0; i < 5; i++) {
         currWord += board[currAttempt.attempt][i];
       }
-      console.log(currWord)
     };
-  console.log(boardDefault)
     return (
       <IonPage>
         <IonHeader>

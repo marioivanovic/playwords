@@ -135,7 +135,6 @@ const Home: React.FC = () => {
   };
 
   const Ionchange = (event: any) => {
-    // console.log("onchange", board);
   };
 
   const prev = () => {
@@ -154,16 +153,13 @@ const Home: React.FC = () => {
       board[row - 1][2].value +
       board[row - 1][3].value +
       board[row - 1][4].value;
-    console.log(arrayToString, random);
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
-      console.log("le mot est green");
       valid = true;
       let copyBoard = [...board];
       copyBoard[row - 1].forEach((col) => {
         col.color = "ionColGreen";
       });
       setBoard(copyBoard);
-      console.log(board);
     } else {
       let copyBoard = [...board];
       let arrayValue = arrayToString.split("");
@@ -199,7 +195,6 @@ const Home: React.FC = () => {
   };
 
   const reset = (event: any) => {
-    console.log(event);
     setBoard(boardDefault);
     setCol(0);
     setRow(0);

@@ -23,7 +23,6 @@ const User: React.FC = () => {
 };
 function GetUser() {
   var user: any = localStorage.getItem("pseudo");
-  console.log(JSON.parse(user).pseudo);
 
   return JSON.parse(user);
 }
