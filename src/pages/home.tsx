@@ -339,17 +339,17 @@ const Home: React.FC = () => {
 
         <div className="containerPartie">
           <IonButton
-            onClick={handleClick}
+            onClick={compare}
             color="success"
             className="keyboard-button compare2"
           >
             Enter
           </IonButton>
-          <IonButton color={"danger"} onClick={prev} className="delete">
-            <IonIcon size="small" className="delete" icon={backspace} />
-          </IonButton>
-          <IonButton  className="deletePartie" color="tertiary"  onClick={reset}>
+          <IonButton  className=" keyboard-button deletePartie" color="tertiary"  onClick={reset}>
             {newGame ? "Nouvelle Partie" : "Recommencer la partie"}
+          </IonButton>
+          <IonButton color={"danger"} onClick={prev} className="delete">
+            <IonIcon size="small" className="keyboard-button delete" icon={backspace} />
           </IonButton>
         </div>
         <div className="keyboard-container">
@@ -366,8 +366,8 @@ const Home: React.FC = () => {
                     >
                       {keyValue}
                     </IonButton>
-                  ) : null} */}
-                  {/* {keyValue === "Reset" ? (
+                  ) : null}
+                  {keyValue === "Reset" ? (
                     <IonButton
                       color={"danger"}
                       onClick={prev}
