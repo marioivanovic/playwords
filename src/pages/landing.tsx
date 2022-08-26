@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   IonContent,
@@ -15,13 +16,18 @@ import {
 } from "@ionic/react";
 import "./landing.css";
 
-import { Gamers, GamersContextConsumer } from "./../services/storage.services";
-
 const Landing: React.FC = () => {
-  var pseudo: string;
-  var games: number;
-  var success: number;
-  var essais: number;
+  const [pseudo, setPseudo] = useState([]);
+
+  const gamer = {
+    pseudo: pseudo,
+  };
+
+  let saveData = () => {
+    localStorage.setItem("pseudo", JSON.stringify(gamer));
+  };
+
+  // localStorage.getItem("pseudo");
 
   const rows = [];
   const legends = [
@@ -46,6 +52,7 @@ const Landing: React.FC = () => {
     }
     rows.push(cols);
   }
+
   return (
     <IonPage>
       <IonHeader>
@@ -61,7 +68,13 @@ const Landing: React.FC = () => {
         </IonHeader>
         <IonItem>
           <IonLabel position="floating">Entrez votre pseudo</IonLabel>
-          <IonInput onIonChange={(e) => (pseudo = e.detail.value!)}></IonInput>
+          <IonInput
+            type="text"
+            id="pseudo"
+            clearInput
+            onIonChange={(e: any) => setPseudo(e.detail.value!)}
+            required
+          ></IonInput>
         </IonItem>
         <IonGrid>
           {rows.length > 0
@@ -87,33 +100,9 @@ const Landing: React.FC = () => {
               ))
             : null}
         </IonGrid>
-        <GamersContextConsumer>
-          {(context: Gamers) => (
-            <IonButton
-              color="medium"
-              size="large"
-              onClick={(e) => {
-                context.gamers
-                  ? context.gamers.push({
-                      pseudo: pseudo,
-                      games: games,
-                      success: success,
-                      essais: essais,
-                    })
-                  : (context.gamers = [
-                      {
-                        pseudo: pseudo,
-                        games: games,
-                        success: success,
-                        essais: essais,
-                      },
-                    ]);
-              }}
-            >
-              <Link to="/home">Jouer</Link>
-            </IonButton>
-          )}
-        </GamersContextConsumer>
+        <IonButton onClick={saveData} color="medium" size="small" type="submit">
+          <Link to="/home">Jouer</Link>
+        </IonButton>
       </IonContent>
     </IonPage>
   );

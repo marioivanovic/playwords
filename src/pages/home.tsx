@@ -24,14 +24,13 @@ const Home: React.FC = () => {
     }
     rows.push(cols);
   }
-
+  const keyboard = claviers;
   // console.log(rows);
   let datass = data;
   // console.log(datass.data);
 
-  // keyboard.map((clavier, key) => {
-  //     console.log(clavier[key]);
-
+  // keyboard.map((clavier, i) => {
+  //   console.log(clavier[i]);
   // });
   const arrayA = [
     [

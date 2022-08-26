@@ -4,9 +4,6 @@ import clavier from "./../keyboards.json";
 const Keyboard: React.FC = () => {
   let keyboards = clavier;
 
-  //   const keyboardTable = document.getElementsByClassName("keyboard-container");
-  //   const letters = keyboardTable[0].innerHTML;
-  //   function displayLetters() {
   // keyboards.clavier
   //   .map((keyboard) => {
   //     document.getElementsByClassName("keyboard-container")[0].innerHTML += `
@@ -15,18 +12,7 @@ const Keyboard: React.FC = () => {
   //           <IonButton>${keyboard.bottom}</IonButton>`;
   //   })
   //   .join("");
-  //   }
-  //   displayLetters();
 
-  // interventions.map((intervention) => {
-  //     const status = getInterventionStyleByStatus(intervention.status);
-  //     document.getElementsByClassName(
-  //         "box-interventions"
-  //     )[0].innerHTML += `<div class="box-intervention ${status}" draggable="true" data-intervention=${intervention.id} >
-  //         <span class="intervention-title">${intervention.title}</span>
-  //         <span class="intervention-status">${intervention.status}</span>
-  //       </div>`;
-  // });
   //   for (var key in keyboards) {
   //     var top = keyboards.clavier[0];
   //     var middle = keyboards.clavier[1];
