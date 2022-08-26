@@ -136,10 +136,10 @@ const Home: React.FC = () => {
     if (col < 4) {
       setCol(col + 1);
     }
-    if (col === 4) {
-      setRow(row + 1);
-      setCol(0);
-    }
+    // if (col === 4) {
+    //   setRow(row + 1);
+    //   setCol(0);
+    // }
     currentMatrice[row][col].disabled = true;
     currentMatrice[row][col < 4 ? col + 1 : col].disabled = false;
     setBoard(currentMatrice);
@@ -181,18 +181,25 @@ const Home: React.FC = () => {
 
   const compare = (event: any) => {
     let valid = false;
+    // let arrayToString =
+    //   board[row - 1][0].value +
+    //   board[row - 1][1].value +
+    //   board[row - 1][2].value +
+    //   board[row - 1][3].value +
+    //   board[row - 1][4].value;
     let arrayToString =
-      board[row - 1][0].value +
-      board[row - 1][1].value +
-      board[row - 1][2].value +
-      board[row - 1][3].value +
-      board[row - 1][4].value;
+      board[row][0].value +
+      board[row][1].value +
+      board[row][2].value +
+      board[row][3].value +
+      board[row][4].value;
     console.log(arrayToString, random);
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
       console.log("le mot est green");
       valid = true;
       let copyBoard = [...board];
-      copyBoard[row - 1].forEach((col) => {
+      // copyBoard[row - 1].forEach((col) => {
+        copyBoard[row].forEach((col) => {
         col.color = "ionColGreen";
       });
       setBoard(copyBoard);
@@ -227,16 +234,19 @@ const Home: React.FC = () => {
                       nb++;
                     }
                     if (nb > letterRepeatRandom) {
-                      copyBoard[row - 1][i].color = "ionColRed";
+                      // copyBoard[row - 1][i].color = "ionColRed";
+                      copyBoard[row][i].color = "ionColRed";
                       setBoard(copyBoard);
                     }
                   }
 
                   if (nb <= letterRepeatRandom) {
-                    copyBoard[row - 1][i].color = "ionColOrange";
+                    // copyBoard[row - 1][i].color = "ionColOrange";
+                    copyBoard[row][i].color = "ionColOrange";
                     setBoard(copyBoard);
                   } else {
-                    copyBoard[row - 1][i].color = "ionColRed";
+                    // copyBoard[row - 1][i].color = "ionColRed";
+                    copyBoard[row][i].color = "ionColRed";
                     setBoard(copyBoard);
                   }
                 }
@@ -244,7 +254,8 @@ const Home: React.FC = () => {
             }
           }
         } else {
-          copyBoard[row - 1][i].color = "ionColRed";
+          // copyBoard[row - 1][i].color = "ionColRed";
+          copyBoard[row][i].color = "ionColRed";
           setBoard(copyBoard);
         }
       }
@@ -275,6 +286,10 @@ const Home: React.FC = () => {
     }
 
     setStr(result);
+    if (col === 4) {
+      setRow(row + 1);
+      setCol(0);
+    }
   };
 
   const reset = (event: any) => {
@@ -345,11 +360,19 @@ const Home: React.FC = () => {
           >
             Enter
           </IonButton>
-          <IonButton  className=" keyboard-button deletePartie" color="tertiary"  onClick={reset}>
+          <IonButton
+            className=" keyboard-button deletePartie"
+            color="tertiary"
+            onClick={reset}
+          >
             {newGame ? "Nouvelle Partie" : "Recommencer la partie"}
           </IonButton>
           <IonButton color={"danger"} onClick={prev} className="delete">
-            <IonIcon size="small" className="keyboard-button delete" icon={backspace} />
+            <IonIcon
+              size="small"
+              className="keyboard-button delete"
+              icon={backspace}
+            />
           </IonButton>
         </div>
         <div className="keyboard-container">
@@ -382,6 +405,7 @@ const Home: React.FC = () => {
                   ) : null} */}
                   {keyValue !== "Reset" && keyValue !== "Enter" ? (
                     <IonButton
+                    disabled={newGame ? true : false}
                       onClick={handleClick}
                       // size="small"
                       color="warning"
