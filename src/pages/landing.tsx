@@ -77,30 +77,21 @@ const Landing: React.FC = () => {
           ></IonInput>
         </IonItem>
         <IonGrid>
-          {rows.length > 0
-            ? rows.map((row, index) => (
-                <IonRow key={index}>
-                  {row.length > 0
-                    ? row.map((col, i) => (
-                        <IonCol key={i}>
-                          {legends.length > 0
-                            ? legends.map((legend, i) => (
-                                <div className="legend-container">
-                                  <div className="legend {legend.status}"></div>
-                                  <div className="legend-description">
-                                    {legend.description}
-                                  </div>
-                                </div>
-                              ))
-                            : null}
-                        </IonCol>
-                      ))
-                    : null}
-                </IonRow>
-              ))
-            : null}
+          {legends.map((legend, i) => (
+            <div key={i} className="legend-container">
+              <div className={"legend" + " " + legend.status}></div>
+              <div className="legend-description">{legend.description}</div>
+            </div>
+          ))}
         </IonGrid>
-        <IonButton onClick={saveData} color="medium" size="small" type="submit">
+        <IonButton
+          className="btn"
+          onClick={saveData}
+          color="medium"
+          expand="full"
+          size="large"
+          type="submit"
+        >
           <Link to="/home">Jouer</Link>
         </IonButton>
       </IonContent>
