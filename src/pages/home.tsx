@@ -181,12 +181,6 @@ const Home: React.FC = () => {
 
   const compare = (event: any) => {
     let valid = false;
-    // let arrayToString =
-    //   board[row - 1][0].value +
-    //   board[row - 1][1].value +
-    //   board[row - 1][2].value +
-    //   board[row - 1][3].value +
-    //   board[row - 1][4].value;
     let arrayToString =
       board[row][0].value +
       board[row][1].value +
@@ -217,7 +211,7 @@ const Home: React.FC = () => {
               if (
                 worldSplit.toLocaleUpperCase() === strSplit.toLocaleUpperCase()
               ) {
-                copyBoard[row - 1][i].color = "ionColGreen";
+                copyBoard[row][i].color = "ionColGreen";
                 setBoard(copyBoard);
               } else {
                 if (
@@ -300,6 +294,7 @@ const Home: React.FC = () => {
     randomValueFromArray();
     setNewGame(false);
     setStr("");
+    setNbrTest(0);
   };
 
   console.log(isShow);
