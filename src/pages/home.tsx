@@ -85,11 +85,13 @@ const Home: React.FC = () => {
   const [col, setCol] = useState(0);
   const [is, setIS] = useState(false);
   const [wordsFind, setWordsFind] = useState([]);
-
+  const [isRefrech, setIsrefrech] = useState(false);
+  const [str, setStr] = useState("");
+  const [nbrTest, setNbrTest] = useState(0);
 
   useEffect(() => {
     randomValueFromArray();
-  }, [is]);
+  }, [isRefrech]);
 
   const randomValueFromArray = () => {
     let randomValueIndex = Math.floor(Math.random() * arrI.length);
@@ -140,29 +142,31 @@ const Home: React.FC = () => {
   };
 
   const prev = () => {
-    if(col===0){
+    if (col === 0) {
       let copy = [...board];
-      copy[row-1][4].value = "";
-      copy[row-1][4].disabled = false;
+      copy[row - 1][4].value = "";
+      copy[row - 1][4].disabled = false;
       setCol(4);
-      setRow(row-1)
+      setRow(row - 1);
       setBoard(copy);
-    }else{
+    } else {
       let copy = [...board];
-      // console.log(copy);
-      console.log(copy[row][col])
-      copy[row][col-1].value = "";
+      console.log(copy[row][col]);
+      copy[row][col - 1].value = "";
       setCol(col - 1);
       setBoard(copy);
     }
+  };
+  const nbre_caracteres = (lettre: string, mot: string) => {
+    console.log(mot)
+    let mots = mot.split("");
+    var nbre_de_fois_trouve = 0;
 
-    // let copyBoard = [...board];
-    // console.log(col);
-    // copyBoard[row][col - 1].value = "";
-
-    // setCol(col - 1);
-    // setBoard(copyBoard);
-    // setIS(true);
+    for (var i = 0; i < mots.length; i++) {
+      if (lettre == mots[i]) nbre_de_fois_trouve++;
+    }
+    // console.log(nbre_de_fois_trouve) ;
+    return nbre_de_fois_trouve;
   };
 
   const compare = (event: any) => {
@@ -198,14 +202,50 @@ const Home: React.FC = () => {
               ) {
                 copyBoard[row - 1][i].color = "ionColGreen";
                 setBoard(copyBoard);
-              }
-              if (
-                worldSplit.toLocaleUpperCase() !==
-                  strSplit.toLocaleUpperCase() &&
-                random.includes(strSplit.toUpperCase())
-              ) {
-                copyBoard[row - 1][i].color = "ionColOrange";
-                setBoard(copyBoard);
+              }else{
+
+                if (
+                  worldSplit.toLocaleUpperCase() !==
+                    strSplit.toLocaleUpperCase() &&
+                  random.includes(strSplit.toUpperCase())
+                ) {
+  
+                  let letterRepeatRandom = nbre_caracteres(strSplit, random);
+                  let letterRepeatV = nbre_caracteres(strSplit, arrayToString);
+                  console.log("nbr repeat",letterRepeatRandom);
+                  console.log("nbr repeat value",letterRepeatV);
+                  console.log("index", index)
+                  console.log("arrayWord", arrayWord)
+                  console.log("wordSpliit", worldSplit)
+                  let nb = 0;
+  
+  
+                  for (let j = 0; j < arrayValue.length; j++) {
+                    const jStr = arrayValue[j];
+                    console.log("jstr dans la boucle", jStr)
+                    console.log("jstrsplit", strSplit)
+                    if (strSplit === jStr) {
+                      console.log("nbr ++")
+                      nb++;
+                    }
+                    if (nb>letterRepeatRandom) {
+                      console.log("ionColRed")
+                      copyBoard[row - 1][i].color = "ionColRed";
+                      setBoard(copyBoard);
+                    }
+                  }
+  
+  
+                  if (nb <= letterRepeatRandom) {
+                    console.log("ionColOrange")
+                    copyBoard[row - 1][i].color = "ionColOrange";
+                    setBoard(copyBoard);
+                  }else{
+                    console.log("ionColRed")
+                    copyBoard[row - 1][i].color = "ionColRed";
+                    setBoard(copyBoard);
+                  }
+                }
               }
             }
           }
@@ -215,6 +255,28 @@ const Home: React.FC = () => {
         }
       }
     }
+
+    setNbrTest(nbrTest + 1);
+    let result = "";
+
+    if (nbrTest === 5) {
+      if (valid) {
+        result = "Felicitations c'etait moin une !!!!!";
+      } else {
+        result = "Dommage, loose";
+      }
+      setIsrefrech(true);
+    }
+
+    if (nbrTest < 5) {
+      if (valid) {
+        result = "Felicitations !!!!!";
+      } else {
+        result = "Dommage, loose Vous pouvez reessayez encore";
+      }
+    }
+
+    setStr(result);
   };
 
   const reset = (event: any) => {
@@ -238,6 +300,8 @@ const Home: React.FC = () => {
             <IonTitle size="large">Tab 2</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <h1 className="ioncol">{str}</h1>
+
         <IonGrid>
           {board.length > 0
             ? board.map((row, index) => (
@@ -300,10 +364,7 @@ const Home: React.FC = () => {
           ))}
 
           <IonButton color={"danger"} onClick={reset}>
-            <IonIcon
-              className="keyboard-button"
-              icon={refreshCircle}
-            />
+            <IonIcon className="keyboard-button" icon={refreshCircle} />
           </IonButton>
         </div>
         <h1 className="ioncol">Le mot à trouver est : {random}</h1>
