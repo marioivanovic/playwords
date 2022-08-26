@@ -84,6 +84,9 @@ const Home: React.FC = () => {
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
   const [is, setIS] = useState(false);
+  const [wordsFind, setWordsFind] = useState([]);
+
+
   useEffect(() => {
     randomValueFromArray();
   }, [is]);
@@ -137,11 +140,29 @@ const Home: React.FC = () => {
   };
 
   const prev = () => {
-    let copyBoard = [...board];
-    copyBoard[row][col - 1].value = "";
-    setCol(col - 1);
-    setBoard(copyBoard);
-    setIS(true);
+    if(col===0){
+      let copy = [...board];
+      copy[row-1][4].value = "";
+      copy[row-1][4].disabled = false;
+      setCol(4);
+      setRow(row-1)
+      setBoard(copy);
+    }else{
+      let copy = [...board];
+      // console.log(copy);
+      console.log(copy[row][col])
+      copy[row][col-1].value = "";
+      setCol(col - 1);
+      setBoard(copy);
+    }
+
+    // let copyBoard = [...board];
+    // console.log(col);
+    // copyBoard[row][col - 1].value = "";
+
+    // setCol(col - 1);
+    // setBoard(copyBoard);
+    // setIS(true);
   };
 
   const compare = (event: any) => {
@@ -161,7 +182,7 @@ const Home: React.FC = () => {
         col.color = "ionColGreen";
       });
       setBoard(copyBoard);
-      console.log(board);
+      // wordsFind.push(arrayToString);
     } else {
       let copyBoard = [...board];
       let arrayValue = arrayToString.split("");
