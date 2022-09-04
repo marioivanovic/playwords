@@ -93,6 +93,28 @@ const Home: React.FC = () => {
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
   const [is, setIS] = useState(false);
+  const [games, setGames] = useState([]);
+  const [essais, setEssais] = useState([]);
+  const [words, setWords] = useState([]);
+
+  const gamer = {
+    games: games,
+    essais: essais,
+    words: words,
+  };
+
+  let saveGame = () => {
+    localStorage.setItem("games", JSON.stringify(gamer));
+    localStorage.setItem("essais", JSON.stringify(gamer));
+    localStorage.setItem("words", JSON.stringify(gamer));
+  };
+
+  function GetUser() {
+    var user: any = localStorage.getItem("pseudo");
+
+    return JSON.parse(user);
+  }
+
   const [wordsFind, setWordsFind] = useState([]);
   const [isRefrech, setIsrefrech] = useState(false);
   const [newGame, setNewGame] = useState(false);
@@ -100,6 +122,7 @@ const Home: React.FC = () => {
   const [str, setStr] = useState("");
   const [nbrTest, setNbrTest] = useState(0);
   const [presentAlert] = useIonAlert();
+
 
   useEffect(() => {
     randomValueFromArray();
@@ -149,9 +172,7 @@ const Home: React.FC = () => {
     setPress(event.target.innerText);
   };
 
-  const Ionchange = (event: any) => {
-    // console.log("onchange", board);
-  };
+  const Ionchange = (event: any) => {};
 
   const prev = () => {
     if (col === 0) {
@@ -190,8 +211,8 @@ const Home: React.FC = () => {
       board[row][3].value +
       board[row][4].value;
     console.log(arrayToString, random);
+
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
-      console.log("le mot est green");
       valid = true;
       let copyBoard = [...board];
       // copyBoard[row - 1].forEach((col) => {
@@ -199,7 +220,6 @@ const Home: React.FC = () => {
         col.color = "ionColGreen";
       });
       setBoard(copyBoard);
-      // wordsFind.push(arrayToString);
     } else {
       let copyBoard = [...board];
       let arrayValue = arrayToString.split("");
@@ -289,7 +309,6 @@ const Home: React.FC = () => {
   };
 
   const reset = (event: any) => {
-    console.log(event);
     setBoard(boardDefault);
     setCol(0);
     setRow(0);
@@ -323,6 +342,9 @@ const Home: React.FC = () => {
 
         {/* grid */}
         <IonGrid>
+          <IonButton color={"medium"} onClick={reset}>
+            <IonIcon className="keyboard-button" icon={refreshCircle} />
+          </IonButton>
           {board.length > 0
             ? board.map((row, index) => (
                 <IonRow className="ion-row" key={index} id={"id-" + index}>
@@ -398,7 +420,7 @@ const Home: React.FC = () => {
                     <IonButton
                     disabled={newGame ? true : false}
                       onClick={handleClick}
-                      // size="small"
+                      size="large"
                       color="warning"
                       className="keyboard-button annuler"
                     >

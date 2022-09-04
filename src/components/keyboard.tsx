@@ -16,7 +16,6 @@ const Keyboard: React.FC = () => {
     ["B", "M", "N", "V", "C", "Z", "X"],
   ];
   const handleClick = (event:any)=>{
-    console.log(event.target.innerText);
     setPress(event.target.innerText);
   }
   return (

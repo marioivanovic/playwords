@@ -25,10 +25,7 @@ ion-button {
     display: flex;
     justify-content: center;
 }
-/* .annuler {
-    height: 3rem;
-    width: 3rem;
-} */
+
 .ioncol, .ionColGreen, .ionColOrange, .ionColRed {
     min-width: 3rem;
     min-height: 3rem;
@@ -46,3 +43,4 @@ ion-button {
     border-top: 1px solid #fff;
     justify-content: center;
 }
+

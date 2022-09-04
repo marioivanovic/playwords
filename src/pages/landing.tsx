@@ -21,13 +21,12 @@ const Landing: React.FC = () => {
 
   const gamer = {
     pseudo: pseudo,
+    
   };
 
   let saveData = () => {
     localStorage.setItem("pseudo", JSON.stringify(gamer));
   };
-
-  // localStorage.getItem("pseudo");
 
   const rows = [];
   const legends = [
