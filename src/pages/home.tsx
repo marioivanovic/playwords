@@ -15,6 +15,7 @@ import {
   IonAlert,
 } from "@ionic/react";
 import "./home.css";
+import Keyboard from "./../components/keyboard";
 import data from "../Data.json";
 import { useEffect, useRef, useState } from "react";
 import "../components/keyboard.css";
@@ -39,6 +40,7 @@ const Home: React.FC = () => {
     }
     rows.push(cols);
   }
+
   let boardDefault = [
     [
       { value: "", disabled: false, color: "ioncol" },
@@ -300,11 +302,6 @@ const Home: React.FC = () => {
   console.log(isShow);
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -345,7 +342,6 @@ const Home: React.FC = () => {
               ))
             : null}
         </IonGrid>
-        {/* clavier */}
 
         <div className="containerPartie">
           <IonButton
