@@ -86,6 +86,28 @@ const Home: React.FC = () => {
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
   const [is, setIS] = useState(false);
+  const [games, setGames] = useState([]);
+  const [essais, setEssais] = useState([]);
+  const [words, setWords] = useState([]);
+
+  const gamer = {
+    games: games,
+    essais: essais,
+    words: words,
+  };
+
+  let saveGame = () => {
+    localStorage.setItem("games", JSON.stringify(gamer));
+    localStorage.setItem("essais", JSON.stringify(gamer));
+    localStorage.setItem("words", JSON.stringify(gamer));
+  };
+
+  function GetUser() {
+    var user: any = localStorage.getItem("pseudo");
+
+    return JSON.parse(user);
+  }
+
   useEffect(() => {
     randomValueFromArray();
   }, [is]);
@@ -134,8 +156,7 @@ const Home: React.FC = () => {
     setPress(event.target.innerText);
   };
 
-  const Ionchange = (event: any) => {
-  };
+  const Ionchange = (event: any) => {};
 
   const prev = () => {
     let copyBoard = [...board];
@@ -210,6 +231,9 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonGrid>
+          <IonButton color={"medium"} onClick={reset}>
+            <IonIcon className="keyboard-button" icon={refreshCircle} />
+          </IonButton>
           {board.length > 0
             ? board.map((row, index) => (
                 <IonRow key={index} id={"id-" + index}>
@@ -240,6 +264,7 @@ const Home: React.FC = () => {
                       onClick={compare}
                       size="small"
                       className="keyboard-button"
+                      // onIonChange={(e: any) => setGames(e.detail.value!)}
                     >
                       {keyValue}
                     </IonButton>
@@ -247,8 +272,7 @@ const Home: React.FC = () => {
                   {keyValue === "Reset" ? (
                     <IonButton color={"danger"} onClick={prev}>
                       <IonIcon
-                        size="small"
-                        // color="danger"
+                        size="large"
                         className="keyboard-button"
                         icon={backspace}
                       />
@@ -257,7 +281,7 @@ const Home: React.FC = () => {
                   {keyValue !== "Reset" && keyValue !== "Enter" ? (
                     <IonButton
                       onClick={handleClick}
-                      size="small"
+                      size="large"
                       color="warning"
                       className="keyboard-button"
                     >
@@ -268,15 +292,7 @@ const Home: React.FC = () => {
               ))}
             </IonRow>
           ))}
-
-          <IonButton color={"danger"} onClick={reset}>
-            <IonIcon
-              className="keyboard-button"
-              icon={refreshCircle}
-            />
-          </IonButton>
         </div>
-        <h1 className="ioncol">Le mot à trouver est : {random}</h1>
       </IonContent>
     </IonPage>
   );

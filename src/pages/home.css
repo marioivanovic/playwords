@@ -1,5 +1,29 @@
 ion-button {
+    margin-bottom: 20px;
     height: 60px;
-    width: 40px;
+    width: 50px;
     border-radius: 0px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    
+}
+
+ion-grid{
+    padding:1em 0 1em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+
+ion-grid > ion-row{
+    background: #FFB700;
+    color: #fff;
+}
+
+.keyboard-button {
+    height: 60px;
+    width: 50px;
 }
