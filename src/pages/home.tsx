@@ -204,7 +204,6 @@ const Home: React.FC = () => {
   const compare = (event: any) => {
     let valid = false;
     let arrayToString =
-
       board[row][0].value +
       board[row][1].value +
       board[row][2].value +
@@ -215,11 +214,10 @@ const Home: React.FC = () => {
       valid = true;
       let copyBoard = [...board];
       // copyBoard[row - 1].forEach((col) => {
-        copyBoard[row].forEach((col) => {
+      copyBoard[row].forEach((col) => {
         col.color = "ionColGreen";
       });
       setBoard(copyBoard);
-
     } else {
       let copyBoard = [...board];
       let arrayValue = arrayToString.split("");
@@ -324,7 +322,7 @@ const Home: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
+            <IonTitle size="large">A vous de jouer</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonAlert
@@ -390,7 +388,7 @@ const Home: React.FC = () => {
                 <IonCol size="1" className="keyboard-col" key={i}>
                   {keyValue !== "Reset" && keyValue !== "Enter" ? (
                     <IonButton
-                    disabled={newGame ? true : false}
+                      disabled={newGame ? true : false}
                       onClick={handleClick}
                       size="large"
                       color="warning"
