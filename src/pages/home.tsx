@@ -117,17 +117,45 @@ const Home: React.FC = () => {
       for (let i = 0; i < currentMatrice[0].length; i++) {
         const el = currentMatrice[0][i];
         if (i === col) {
-          el.value = event.target.innerText;
+          if (el.disabled !== true) {
+            el.value = event.target.innerText;
+          }
         }
       }
-    } else {
+    }
+    // else {
+    //   for (let index = 0; index < currentMatrice.length; index++) {
+    //     const element = currentMatrice[index];
+    //     if (index === row) {
+    //       for (let i = 0; i < element.length; i++) {
+    //         const el = element[i];
+    //         if (i === col) {
+    //           el.value = event.target.innerText;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    if (row > 0 && currentMatrice[row][col].disabled === false) {
       for (let index = 0; index < currentMatrice.length; index++) {
         const element = currentMatrice[index];
         if (index === row) {
           for (let i = 0; i < element.length; i++) {
             const el = element[i];
             if (i === col) {
-              el.value = event.target.innerText;
+              if (el.disabled === false) {
+                el.value = event.target.innerText;
+              }
+            }
+
+            // if (el.disabled === false) {
+            //   if (i === col) {
+            //   el.value = event.target.innerText;
+            //   }
+            // }
+            if (col === 0) {
+            } else {
             }
           }
         }
@@ -135,16 +163,21 @@ const Home: React.FC = () => {
     }
     if (col < 4) {
       setCol(col + 1);
+      currentMatrice[row][col].disabled = true;
+      currentMatrice[row][col + 1].disabled = false;
     }
-    // if (col === 4) {
-    //   setRow(row + 1);
-    //   setCol(0);
-    // }
-    currentMatrice[row][col].disabled = true;
-    currentMatrice[row][col < 4 ? col + 1 : col].disabled = false;
+    if (col === 4) {
+      // setRow(row + 1);
+      // setCol(0);
+      currentMatrice[row][col].disabled = true;
+      currentMatrice[row + 1][0].disabled = true;
+    }
+    // currentMatrice[row][col].disabled = true;
+    // currentMatrice[row][col < 4 ? col + 1 : col].disabled = false;
     setBoard(currentMatrice);
     boardDefault = currentMatrice;
     setPress(event.target.innerText);
+    console.log("ici", board);
   };
 
   const Ionchange = (event: any) => {
@@ -152,21 +185,73 @@ const Home: React.FC = () => {
   };
 
   const prev = () => {
+    console.log(col);
     if (col === 0) {
+      console.log("first")
       let copy = [...board];
-      copy[row - 1][4].value = "";
-      copy[row - 1][4].disabled = false;
-      setCol(4);
-      setRow(row - 1);
+      copy[row][col].value = "";
+      copy[row][col].disabled = false;
+
+      // copy[row - 1][4].value = "";
+      // copy[row - 1][4].disabled = false;
+      // setCol(4);
+      // setRow(row - 1);
       setBoard(copy);
-    } else {
+    }
+    if (col === 4) {
       let copy = [...board];
-      console.log(copy[row][col]);
-      copy[row][col - 1].value = "";
+      console.log(copy[row]);
+      copy[row][col].value = "";
+
       setCol(col - 1);
       setBoard(copy);
     }
+    if (col === 3) {
+      let copy = [...board];
+      copy[row][col].value = "";
+      setCol(col - 1);
+      setBoard(copy);
+    }
+    if (col === 2) {
+      let copy = [...board];
+      copy[row][col].value = "";
+      setCol(col - 1);
+      setBoard(copy);
+    }
+    if (col === 1) {
+      let copy = [...board];
+      copy[row][col].value = "";
+      setCol(col - 1);
+      setBoard(copy);
+      // let copyBoard = [...board];
+      // setRow(row + 1);
+      // setCol(0);
+      // copyBoard[row+1][0].disabled= false;
+      // console.log(copyBoard[row+1])
+    }
+    // else{
+    //   let copy = [...board];
+    //   console.log(copy[row][col]);
+    //   copy[row][col - 1].value = "";
+    //   setCol(col - 1);
+    //   setBoard(copy);
+    // }
   };
+
+  // if (col === 4) {
+  //   let copy = [...board];
+  //   console.log(copy[row][col]);
+  //   copy[row][col].value = "";
+  //   setCol(col - 1);
+  //   setBoard(copy);
+  // }else{
+  // let copy = [...board];
+  // console.log(copy[row][col]);
+  // copy[row][col].value = "";
+
+  // // copy[row][col - 1].value = "";
+  // setCol(col - 1);
+  // setBoard(copy);}
   const nbre_caracteres = (lettre: string, mot: string) => {
     console.log(mot);
     let mots = mot.split("");
@@ -193,7 +278,7 @@ const Home: React.FC = () => {
       valid = true;
       let copyBoard = [...board];
       // copyBoard[row - 1].forEach((col) => {
-        copyBoard[row].forEach((col) => {
+      copyBoard[row].forEach((col) => {
         col.color = "ionColGreen";
       });
       setBoard(copyBoard);
@@ -280,9 +365,13 @@ const Home: React.FC = () => {
     }
 
     setStr(result);
+    console.log(board);
     if (col === 4) {
+      let copyBoard = [...board];
       setRow(row + 1);
       setCol(0);
+      copyBoard[row + 1][0].disabled = false;
+      console.log(copyBoard[row + 1]);
     }
   };
 
@@ -297,7 +386,6 @@ const Home: React.FC = () => {
     setNbrTest(0);
   };
 
-  console.log(isShow);
   return (
     <IonPage>
       <IonHeader>
@@ -400,7 +488,7 @@ const Home: React.FC = () => {
                   ) : null} */}
                   {keyValue !== "Reset" && keyValue !== "Enter" ? (
                     <IonButton
-                    disabled={newGame ? true : false}
+                      disabled={newGame ? true : false}
                       onClick={handleClick}
                       // size="small"
                       color="warning"
