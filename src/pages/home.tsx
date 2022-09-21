@@ -41,46 +41,46 @@ const Home: React.FC = () => {
   }
   let boardDefault = [
     [
-      { value: "", disabled: false, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
   ];
   const [board, setBoard] = useState([...boardDefault]);
@@ -118,59 +118,17 @@ const Home: React.FC = () => {
     console.log("col", col)
     console.log("board", board)
     let currentMatrice = [...board];
-    if (row === 0) {
-      for (let i = 0; i < currentMatrice[0].length; i++) {
-        const el = currentMatrice[0][i];
-        if (i === col) {
-          if (el.disabled !== true) {
-            el.value = event.target.innerText;
-          }
-        }
-      }
-    }
-    // else {
-    //   for (let index = 0; index < currentMatrice.length; index++) {
-    //     const element = currentMatrice[index];
-    //     if (index === row) {
-    //       for (let i = 0; i < element.length; i++) {
-    //         const el = element[i];
-    //         if (i === col) {
-    //           el.value = event.target.innerText;
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+    
+    currentMatrice[row][col].value = event.target.innerText;
+    
 
-    if (row > 0 && currentMatrice[row][col].disabled === false) {
-      for (let index = 0; index < currentMatrice.length; index++) {
-        const element = currentMatrice[index];
-        if (index === row) {
-          for (let i = 0; i < element.length; i++) {
-            const el = element[i];
-            if (i === col) {
-              if (el.disabled === false) {
-                el.value = event.target.innerText;
-              }
-            }
-            //   if (i === col) {
-            //   el.value = event.target.innerText;
-            //   }
-          }
-        }
-      }
+    
+    if (col < 5) {
+      console.log('check click col < 4', col);
+      setCol((prev) => prev + 1);
+      console.log('check click col < 4after', col);
     }
-    if (col < 4) {
-      setCol(col + 1);
-      currentMatrice[row][col].disabled = true;
-      currentMatrice[row][col + 1].disabled = false;
-    }
-    if (col === 4) {
-      // setRow(row + 1);
-      // setCol(0);
-      currentMatrice[row][col].disabled = true;
-      currentMatrice[row + 1][0].disabled = true;
-    }
+  
     // currentMatrice[row][col].disabled = true;
     // currentMatrice[row][col < 4 ? col + 1 : col].disabled = false;
     setBoard(currentMatrice);
@@ -182,57 +140,28 @@ const Home: React.FC = () => {
 
 
   const prev = () => {
-    console.log("row", row)
-    console.log("col", col)
-    console.log("board", board)
-    if (col===0) {
-      let copy = [...board];
-      copy[row][col].value = "";
-      copy[row][col].disabled = false;
-      setBoard(copy);
-      console.log(row, col);
-    }
-    if(col >0){
-      let copy = [...board];
+    // console.log("row", row)
+    // console.log("col", col)
+    // console.log("board", board)
+
+    let copy = [...board];
+    if (col===5) {
       copy[row][col-1].value = "";
-      copy[row][col].disabled = true;
-      copy[row][col - 1].disabled = false;
-      setCol(col-1);
+      setCol((prev) => prev-1);
+
+    }else{
+
+      copy[row][col-1].value = "";
+      setCol((prev) => prev-1);
+      console.log('4', row, col);
       setBoard(copy);
-      console.log(row, col);
     }
 
-
-    // if (col===4) {
-    //   let copy = [...board];
-    //   copy[row][col].value = "";
-    //   copy[row][col].disabled = false;
-    //   setCol(col-1);
-    //   setBoard(copy);
-    // }else{
-    //   let copy = [...board];
-    //   copy[row][col - 1].value = "";
-    //   copy[row][col].disabled = true;
-    //   copy[row][col - 1].disabled = false;
-    //   setCol(col-1);
-    //   setBoard(copy);
-    // }
+    
+    
   };
 
-  // if (col === 4) {
-  //   let copy = [...board];
-  //   console.log(copy[row][col]);
-  //   copy[row][col].value = "";
-  //   setCol(col - 1);
-  //   setBoard(copy);
-  // }else{
-  // let copy = [...board];
-  // console.log(copy[row][col]);
-  // copy[row][col].value = "";
 
-  // // copy[row][col - 1].value = "";
-  // setCol(col - 1);
-  // setBoard(copy);}
 
   const nbre_caracteres = (lettre: string, mot: string) => {
     console.log(mot);
@@ -352,7 +281,7 @@ const Home: React.FC = () => {
       let copyBoard = [...board];
       setRow(row + 1);
       setCol(0);
-      copyBoard[row + 1][0].disabled = false;
+      // copyBoard[row + 1][0].disabled = false;
       console.log(copyBoard[row + 1]);
     }
   };
