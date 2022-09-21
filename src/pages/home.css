@@ -27,3 +27,43 @@ ion-grid > ion-row{
     height: 60px;
     width: 50px;
 }
+
+.compare {
+    width: 5rem;
+    transform: translateX(-50%);
+}
+
+.compare2 {
+    width: 5rem;
+    height: 3rem;
+}
+ .delete {
+    height: 3rem;
+    width: 3rem;
+}
+.deletePartie {
+    height: 3rem;
+    width: auto;
+}
+.containerPartie{
+    display: flex;
+    justify-content: center;
+}
+
+.ioncol, .ionColGreen, .ionColOrange, .ionColRed {
+    min-width: 3rem;
+    min-height: 3rem;
+    border-right: 1px solid #fff;
+    text-align: center;
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
+
+.ioncol{
+    background-color: #ca6702;
+}
+
+.ion-row {
+    border-top: 1px solid #fff;
+    justify-content: center;
+}
