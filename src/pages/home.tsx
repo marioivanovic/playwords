@@ -90,7 +90,6 @@ const Home: React.FC = () => {
   const [random, setRandom] = useState("");
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
-  const [prevCol, setPrevCol] = useState(col);
   const [is, setIS] = useState(false);
   const [wordsFind, setWordsFind] = useState([]);
   const [isRefrech, setIsrefrech] = useState(false);
@@ -114,15 +113,12 @@ const Home: React.FC = () => {
   };
 
   const handleClick = (event: any) => {
-    console.log("row", row)
-    console.log("col", col)
-    console.log("board", board)
+    // console.log("row", row);
+    // console.log("col", col);
+    // console.log("board", board);
     let currentMatrice = [...board];
     
     currentMatrice[row][col].value = event.target.innerText;
-    
-
-    
     if (col < 5) {
       console.log('check click col < 4', col);
       setCol((prev) => prev + 1);
@@ -137,7 +133,6 @@ const Home: React.FC = () => {
     // console.log("col", col);
     // console.log("ici", board);
   };
-
 
   const prev = () => {
     // console.log("row", row)
@@ -155,13 +150,8 @@ const Home: React.FC = () => {
       setCol((prev) => prev-1);
       console.log('4', row, col);
       setBoard(copy);
-    }
-
-    
-    
+    }    
   };
-
-
 
   const nbre_caracteres = (lettre: string, mot: string) => {
     console.log(mot);
@@ -268,22 +258,25 @@ const Home: React.FC = () => {
     if (nbrTest < 5) {
       if (valid) {
         result = "Felicitations !!!!!";
-        setIsShow(true);
+        // setIsShow(true);
         setNewGame(true);
       } else {
         result = "Dommage, loose Vous pouvez reessayez encore";
       }
+      setIsShow(true);
     }
 
     setStr(result);
     console.log(board);
-    if (col === 4) {
+    if (col === 5) {
       let copyBoard = [...board];
       setRow(row + 1);
       setCol(0);
       // copyBoard[row + 1][0].disabled = false;
       console.log(copyBoard[row + 1]);
     }
+
+
   };
 
   const reset = (event: any) => {
@@ -313,10 +306,9 @@ const Home: React.FC = () => {
             <IonTitle size="large">Tab 2</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <h1 className="ioncol">Le mot à trouver est : {random}</h1>
-        {/* <IonButton color={"danger"} onClick={reset}>
-          <IonIcon className="keyboard-button" icon={refreshCircle} />
-        </IonButton> */}
+        {/* <br/> */}
+        <h1 className="ioncol">Bonne Chance !!! {random}</h1>
+        {/* <h1 className="ioncol">Le mot à trouver est : {random}</h1> */}
         <IonAlert
           isOpen={isShow}
           onDidDismiss={() => setIsShow(false)}
@@ -347,8 +339,8 @@ const Home: React.FC = () => {
               ))
             : null}
         </IonGrid>
-        {/* clavier */}
 
+        {/* clavier */}
         <div className="containerPartie">
           <IonButton
             onClick={compare}
@@ -359,12 +351,12 @@ const Home: React.FC = () => {
           </IonButton>
           <IonButton
             className=" keyboard-button deletePartie"
-            color="tertiary"
+            color="medium"
             onClick={reset}
           >
             {newGame ? "Nouvelle Partie" : "Recommencer la partie"}
           </IonButton>
-          <IonButton color={"danger"} onClick={prev} className="delete">
+          <IonButton color="light" onClick={prev} className="delete">
             <IonIcon
               size="small"
               className="keyboard-button delete"
@@ -377,29 +369,6 @@ const Home: React.FC = () => {
             <IonRow key={index} className="keyboard-container-flex">
               {a.map((keyValue, i) => (
                 <IonCol size="1" className="keyboard-col" key={i}>
-                  {/* {keyValue === "Enter" ? (
-                    <IonButton
-                      color="success"
-                      onClick={compare}
-                      size="small"
-                      className="keyboard-button compare"
-                    >
-                      {keyValue}
-                    </IonButton>
-                  ) : null}
-                  {keyValue === "Reset" ? (
-                    <IonButton
-                      color={"danger"}
-                      onClick={prev}
-                      className="delete"
-                    >
-                      <IonIcon
-                        size="small"
-                        className="delete"
-                        icon={backspace}
-                      />
-                    </IonButton>
-                  ) : null} */}
                   {keyValue !== "Reset" && keyValue !== "Enter" ? (
                     <IonButton
                       disabled={newGame ? true : false}
