@@ -324,7 +324,7 @@ const Home: React.FC = () => {
             <IonTitle size="large">Tab 2</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <h1 className="ioncol">Le mot à trouver est : {random}</h1>
+        {/* <h1 className="ioncol">Le mot à trouver est : {random}</h1> */}
         {/* <IonButton color={"danger"} onClick={reset}>
           <IonIcon className="keyboard-button" icon={refreshCircle} />
         </IonButton> */}
