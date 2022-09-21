@@ -54,15 +54,10 @@ const Landing: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Bienvenue</IonTitle>
+            <IonTitle>Entrez ici votre pseudo</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonItem>

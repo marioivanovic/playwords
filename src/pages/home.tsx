@@ -213,7 +213,7 @@ const Home: React.FC = () => {
       valid = true;
       let copyBoard = [...board];
       // copyBoard[row - 1].forEach((col) => {
-        copyBoard[row].forEach((col) => {
+      copyBoard[row].forEach((col) => {
         col.color = "ionColGreen";
       });
       setBoard(copyBoard);
@@ -321,13 +321,14 @@ const Home: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
+            <IonTitle size="large">A vous de jouer</IonTitle>
           </IonToolbar>
         </IonHeader>
         {/* <h1 className="ioncol">Le mot à trouver est : {random}</h1> */}
         {/* <IonButton color={"danger"} onClick={reset}>
           <IonIcon className="keyboard-button" icon={refreshCircle} />
         </IonButton> */}
+
         <IonAlert
           isOpen={isShow}
           onDidDismiss={() => setIsShow(false)}
@@ -337,7 +338,6 @@ const Home: React.FC = () => {
           buttons={["OK"]}
         />
 
-        {/* grid */}
         <IonGrid>
           <IonButton color={"medium"} onClick={reset}>
             <IonIcon className="keyboard-button" icon={refreshCircle} />
@@ -390,32 +390,9 @@ const Home: React.FC = () => {
             <IonRow key={index} className="keyboard-container-flex">
               {a.map((keyValue, i) => (
                 <IonCol size="1" className="keyboard-col" key={i}>
-                  {/* {keyValue === "Enter" ? (
-                    <IonButton
-                      color="success"
-                      onClick={compare}
-                      size="small"
-                      className="keyboard-button compare"
-                    >
-                      {keyValue}
-                    </IonButton>
-                  ) : null}
-                  {keyValue === "Reset" ? (
-                    <IonButton
-                      color={"danger"}
-                      onClick={prev}
-                      className="delete"
-                    >
-                      <IonIcon
-                        size="small"
-                        className="delete"
-                        icon={backspace}
-                      />
-                    </IonButton>
-                  ) : null} */}
                   {keyValue !== "Reset" && keyValue !== "Enter" ? (
                     <IonButton
-                    disabled={newGame ? true : false}
+                      disabled={newGame ? true : false}
                       onClick={handleClick}
                       size="large"
                       color="warning"
