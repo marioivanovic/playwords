@@ -16,17 +16,35 @@ import {
 } from "@ionic/react";
 import "./landing.css";
 
+import { Stat, updateStorage } from "../utils/stats";
+
 const Landing: React.FC = () => {
   const [pseudo, setPseudo] = useState([]);
+  const [words, setWords] = useState([]);
+  const [essais, setEssais] = useState([]);
+  const [games, setGames] = useState([]);
 
   const gamer = {
     pseudo: pseudo,
+    essai: essais
   };
 
-  let saveData = () => {
-    localStorage.setItem("pseudo", JSON.stringify(gamer));
+  let saveData = (event: any) => {
+    var currentStat: any = stat;
+    currentStat.pseudo = pseudo;
+    localStorage.setItem("stat", JSON.stringify(currentStat));
   };
+  console.log(pseudo);
 
+  const [stat, setStat] = useState({});
+  useEffect(() => {
+    setStat(
+      new Stat({
+        // goalWorld: pseudo,
+      })
+    );
+  }, []);
+ 
   const rows = [];
   const legends = [
     {
@@ -64,8 +82,8 @@ const Landing: React.FC = () => {
           <IonInput
             type="text"
             id="pseudo"
-            clearInput
             onIonChange={(e: any) => setPseudo(e.detail.value!)}
+            clearInput
             required
           ></IonInput>
         </IonItem>
@@ -79,8 +97,8 @@ const Landing: React.FC = () => {
         </IonGrid>
         <IonButton
           className="btn"
-          onClick={saveData}
           color="medium"
+          onClick={saveData}
           expand="full"
           size="large"
           type="submit"

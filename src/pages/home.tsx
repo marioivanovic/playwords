@@ -24,6 +24,7 @@ import { backspace, refreshCircle } from "ionicons/icons";
 import "../components/styles.css";
 import AlertIon from "../components/AlertIon";
 import ModalInfo from "../components/ModalInfo";
+import { Game, updateStorage } from "../utils/stats";
 
 const Home: React.FC = () => {
   const modal = useRef<HTMLIonModalElement>(null);
@@ -108,12 +109,6 @@ const Home: React.FC = () => {
     localStorage.setItem("essais", JSON.stringify(gamer));
     localStorage.setItem("words", JSON.stringify(gamer));
   };
-
-  function GetUser() {
-    var user: any = localStorage.getItem("pseudo");
-
-    return JSON.parse(user);
-  }
 
   const [wordsFind, setWordsFind] = useState([]);
   const [isRefrech, setIsrefrech] = useState(false);
@@ -209,7 +204,7 @@ const Home: React.FC = () => {
       board[row][2].value +
       board[row][3].value +
       board[row][4].value;
-    console.log(arrayToString, random);
+    console.log("207", arrayToString, random);
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
       valid = true;
       let copyBoard = [...board];
@@ -274,15 +269,24 @@ const Home: React.FC = () => {
         }
       }
     }
+    var essaisCount = nbrTest + 1;
+    var game = new Game({ essais: essaisCount, words: random });
+    setNbrTest(essaisCount);
 
-    setNbrTest(nbrTest + 1);
+    let statStorage: any = localStorage.getItem("stat");
+    let statParse: any = JSON.parse(statStorage);
+    let stats: any = statParse.stats;
+
+    stats.push(game);
+    updateStorage("stat", { stats: stats });
+
     let result = "";
 
     if (nbrTest === 5) {
       if (valid) {
-        result = "Felicitations c'etait moin une !!!!!";
+        result = "Felicitations c'etait moins une !!";
       } else {
-        result = "Dommage, loose, Vous avez perdu";
+        result = "Dommage, vous avez perdu, retentez votre chance !";
       }
       setIsShow(true);
       setIsrefrech(true);
@@ -335,6 +339,7 @@ const Home: React.FC = () => {
         />
 
         <IonGrid>
+          <h1 className="ioncol">Le mot à trouver est : {random}</h1>
           <IonButton color={"medium"} onClick={reset}>
             <IonIcon className="keyboard-button" icon={refreshCircle} />
           </IonButton>

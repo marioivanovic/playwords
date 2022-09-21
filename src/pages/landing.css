@@ -31,7 +31,8 @@ ion-grid{
 }
 
 .btn{
-    margin: 35%;
+    margin-top: 50px;
+    margin-left: 35%;
     width: 120px;
     height: 50px;
     border-radius: 15px;
