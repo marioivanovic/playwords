@@ -123,6 +123,7 @@ const Home: React.FC = () => {
   const [nbrTest, setNbrTest] = useState(0);
   const [presentAlert] = useIonAlert();
 
+
   useEffect(() => {
     randomValueFromArray();
   }, [isRefrech]);
@@ -160,10 +161,6 @@ const Home: React.FC = () => {
     if (col < 4) {
       setCol(col + 1);
     }
-    // if (col === 4) {
-    //   setRow(row + 1);
-    //   setCol(0);
-    // }
     currentMatrice[row][col].disabled = true;
     currentMatrice[row][col < 4 ? col + 1 : col].disabled = false;
     setBoard(currentMatrice);
@@ -203,6 +200,7 @@ const Home: React.FC = () => {
 
   const compare = (event: any) => {
     let valid = false;
+    
     let arrayToString =
       board[row][0].value +
       board[row][1].value +
@@ -210,6 +208,7 @@ const Home: React.FC = () => {
       board[row][3].value +
       board[row][4].value;
     console.log(arrayToString, random);
+
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
       valid = true;
       let copyBoard = [...board];
@@ -325,6 +324,11 @@ const Home: React.FC = () => {
             <IonTitle size="large">A vous de jouer</IonTitle>
           </IonToolbar>
         </IonHeader>
+        {/* <h1 className="ioncol">Le mot à trouver est : {random}</h1> */}
+        {/* <IonButton color={"danger"} onClick={reset}>
+          <IonIcon className="keyboard-button" icon={refreshCircle} />
+        </IonButton> */}
+
         <IonAlert
           isOpen={isShow}
           onDidDismiss={() => setIsShow(false)}

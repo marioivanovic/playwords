@@ -21,6 +21,7 @@ const Landing: React.FC = () => {
 
   const gamer = {
     pseudo: pseudo,
+    
   };
 
   let saveData = () => {
