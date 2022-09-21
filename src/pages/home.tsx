@@ -90,15 +90,11 @@ const Home: React.FC = () => {
   const [random, setRandom] = useState("");
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
-  const [is, setIS] = useState(false);
-  const [wordsFind, setWordsFind] = useState([]);
   const [isRefrech, setIsrefrech] = useState(false);
   const [newGame, setNewGame] = useState(false);
   const [isShow, setIsShow] = useState(false);
   const [str, setStr] = useState("");
   const [nbrTest, setNbrTest] = useState(0);
-  const [presentAlert] = useIonAlert();
-  let nbrCol = 0;
 
   useEffect(() => {
     randomValueFromArray();
@@ -113,59 +109,39 @@ const Home: React.FC = () => {
   };
 
   const handleClick = (event: any) => {
-    // console.log("row", row);
-    // console.log("col", col);
-    // console.log("board", board);
     let currentMatrice = [...board];
-    
     currentMatrice[row][col].value = event.target.innerText;
     if (col < 5) {
-      console.log('check click col < 4', col);
       setCol((prev) => prev + 1);
-      console.log('check click col < 4after', col);
     }
-  
-    // currentMatrice[row][col].disabled = true;
-    // currentMatrice[row][col < 4 ? col + 1 : col].disabled = false;
     setBoard(currentMatrice);
     boardDefault = currentMatrice;
     setPress(event.target.innerText);
-    // console.log("col", col);
-    // console.log("ici", board);
   };
 
   const prev = () => {
-    // console.log("row", row)
-    // console.log("col", col)
-    // console.log("board", board)
-
     let copy = [...board];
     if (col===5) {
       copy[row][col-1].value = "";
       setCol((prev) => prev-1);
-
     }else{
-
       copy[row][col-1].value = "";
       setCol((prev) => prev-1);
-      console.log('4', row, col);
       setBoard(copy);
     }    
   };
 
   const nbre_caracteres = (lettre: string, mot: string) => {
-    console.log(mot);
     let mots = mot.split("");
     var nbre_de_fois_trouve = 0;
 
     for (var i = 0; i < mots.length; i++) {
-      if (lettre == mots[i]) nbre_de_fois_trouve++;
+      if (lettre === mots[i]) nbre_de_fois_trouve++;
     }
-    // console.log(nbre_de_fois_trouve) ;
     return nbre_de_fois_trouve;
   };
 
-  const compare = (event: any) => {
+  const compare = () => {
     let valid = false;
     let arrayToString =
       board[row][0].value +
@@ -173,17 +149,13 @@ const Home: React.FC = () => {
       board[row][2].value +
       board[row][3].value +
       board[row][4].value;
-    console.log(arrayToString, random);
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
-      console.log("le mot est green");
       valid = true;
       let copyBoard = [...board];
-      // copyBoard[row - 1].forEach((col) => {
       copyBoard[row].forEach((col) => {
         col.color = "ionColGreen";
       });
       setBoard(copyBoard);
-      // wordsFind.push(arrayToString);
     } else {
       let copyBoard = [...board];
       let arrayValue = arrayToString.split("");
@@ -214,18 +186,15 @@ const Home: React.FC = () => {
                       nb++;
                     }
                     if (nb > letterRepeatRandom) {
-                      // copyBoard[row - 1][i].color = "ionColRed";
                       copyBoard[row][i].color = "ionColRed";
                       setBoard(copyBoard);
                     }
                   }
 
                   if (nb <= letterRepeatRandom) {
-                    // copyBoard[row - 1][i].color = "ionColOrange";
                     copyBoard[row][i].color = "ionColOrange";
                     setBoard(copyBoard);
                   } else {
-                    // copyBoard[row - 1][i].color = "ionColRed";
                     copyBoard[row][i].color = "ionColRed";
                     setBoard(copyBoard);
                   }
@@ -234,7 +203,6 @@ const Home: React.FC = () => {
             }
           }
         } else {
-          // copyBoard[row - 1][i].color = "ionColRed";
           copyBoard[row][i].color = "ionColRed";
           setBoard(copyBoard);
         }
@@ -258,7 +226,6 @@ const Home: React.FC = () => {
     if (nbrTest < 5) {
       if (valid) {
         result = "Felicitations !!!!!";
-        // setIsShow(true);
         setNewGame(true);
       } else {
         result = "Dommage, loose Vous pouvez reessayez encore";
@@ -267,20 +234,15 @@ const Home: React.FC = () => {
     }
 
     setStr(result);
-    console.log(board);
     if (col === 5) {
-      let copyBoard = [...board];
       setRow(row + 1);
       setCol(0);
-      // copyBoard[row + 1][0].disabled = false;
-      console.log(copyBoard[row + 1]);
     }
 
 
   };
 
-  const reset = (event: any) => {
-    console.log(event);
+  const reset = () => {
     setBoard(boardDefault);
     setCol(0);
     setRow(0);
@@ -290,9 +252,8 @@ const Home: React.FC = () => {
     setNbrTest(0);
   };
 
-  const Ionchange = (event: any) => {};
+  const Ionchange = () => {};
 
-  // console.log(prevCol);
   return (
     <IonPage>
       <IonHeader>
@@ -306,9 +267,7 @@ const Home: React.FC = () => {
             <IonTitle size="large">Tab 2</IonTitle>
           </IonToolbar>
         </IonHeader>
-        {/* <br/> */}
         <h1 className="ioncol">Bonne Chance !!! {random}</h1>
-        {/* <h1 className="ioncol">Le mot à trouver est : {random}</h1> */}
         <IonAlert
           isOpen={isShow}
           onDidDismiss={() => setIsShow(false)}
