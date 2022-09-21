@@ -90,6 +90,7 @@ const Home: React.FC = () => {
   const [random, setRandom] = useState("");
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
+  const [prevCol, setPrevCol] = useState(col);
   const [is, setIS] = useState(false);
   const [wordsFind, setWordsFind] = useState([]);
   const [isRefrech, setIsrefrech] = useState(false);
@@ -98,6 +99,7 @@ const Home: React.FC = () => {
   const [str, setStr] = useState("");
   const [nbrTest, setNbrTest] = useState(0);
   const [presentAlert] = useIonAlert();
+  let nbrCol = 0;
 
   useEffect(() => {
     randomValueFromArray();
@@ -112,6 +114,9 @@ const Home: React.FC = () => {
   };
 
   const handleClick = (event: any) => {
+    console.log("row", row)
+    console.log("col", col)
+    console.log("board", board)
     let currentMatrice = [...board];
     if (row === 0) {
       for (let i = 0; i < currentMatrice[0].length; i++) {
@@ -148,15 +153,9 @@ const Home: React.FC = () => {
                 el.value = event.target.innerText;
               }
             }
-
-            // if (el.disabled === false) {
             //   if (i === col) {
             //   el.value = event.target.innerText;
             //   }
-            // }
-            if (col === 0) {
-            } else {
-            }
           }
         }
       }
@@ -177,63 +176,45 @@ const Home: React.FC = () => {
     setBoard(currentMatrice);
     boardDefault = currentMatrice;
     setPress(event.target.innerText);
-    console.log("ici", board);
+    // console.log("col", col);
+    // console.log("ici", board);
   };
 
-  const Ionchange = (event: any) => {
-    // console.log("onchange", board);
-  };
 
   const prev = () => {
-    console.log(col);
-    if (col === 0) {
-      console.log("first")
+    console.log("row", row)
+    console.log("col", col)
+    console.log("board", board)
+    if (col===0) {
       let copy = [...board];
       copy[row][col].value = "";
       copy[row][col].disabled = false;
+      setBoard(copy);
+      console.log(row, col);
+    }
+    if(col >0){
+      let copy = [...board];
+      copy[row][col-1].value = "";
+      copy[row][col].disabled = true;
+      copy[row][col - 1].disabled = false;
+      setCol(col-1);
+      setBoard(copy);
+      console.log(row, col);
+    }
 
-      // copy[row - 1][4].value = "";
-      // copy[row - 1][4].disabled = false;
-      // setCol(4);
-      // setRow(row - 1);
-      setBoard(copy);
-    }
-    if (col === 4) {
-      let copy = [...board];
-      console.log(copy[row]);
-      copy[row][col].value = "";
 
-      setCol(col - 1);
-      setBoard(copy);
-    }
-    if (col === 3) {
-      let copy = [...board];
-      copy[row][col].value = "";
-      setCol(col - 1);
-      setBoard(copy);
-    }
-    if (col === 2) {
-      let copy = [...board];
-      copy[row][col].value = "";
-      setCol(col - 1);
-      setBoard(copy);
-    }
-    if (col === 1) {
-      let copy = [...board];
-      copy[row][col].value = "";
-      setCol(col - 1);
-      setBoard(copy);
-      // let copyBoard = [...board];
-      // setRow(row + 1);
-      // setCol(0);
-      // copyBoard[row+1][0].disabled= false;
-      // console.log(copyBoard[row+1])
-    }
-    // else{
+    // if (col===4) {
     //   let copy = [...board];
-    //   console.log(copy[row][col]);
+    //   copy[row][col].value = "";
+    //   copy[row][col].disabled = false;
+    //   setCol(col-1);
+    //   setBoard(copy);
+    // }else{
+    //   let copy = [...board];
     //   copy[row][col - 1].value = "";
-    //   setCol(col - 1);
+    //   copy[row][col].disabled = true;
+    //   copy[row][col - 1].disabled = false;
+    //   setCol(col-1);
     //   setBoard(copy);
     // }
   };
@@ -252,6 +233,7 @@ const Home: React.FC = () => {
   // // copy[row][col - 1].value = "";
   // setCol(col - 1);
   // setBoard(copy);}
+
   const nbre_caracteres = (lettre: string, mot: string) => {
     console.log(mot);
     let mots = mot.split("");
@@ -386,11 +368,14 @@ const Home: React.FC = () => {
     setNbrTest(0);
   };
 
+  const Ionchange = (event: any) => {};
+
+  // console.log(prevCol);
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
+          <IonTitle>Tab 2</IonTitle> 
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
