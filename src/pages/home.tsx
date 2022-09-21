@@ -161,10 +161,6 @@ const Home: React.FC = () => {
     if (col < 4) {
       setCol(col + 1);
     }
-    // if (col === 4) {
-    //   setRow(row + 1);
-    //   setCol(0);
-    // }
     currentMatrice[row][col].disabled = true;
     currentMatrice[row][col < 4 ? col + 1 : col].disabled = false;
     setBoard(currentMatrice);
@@ -204,6 +200,7 @@ const Home: React.FC = () => {
 
   const compare = (event: any) => {
     let valid = false;
+    
     let arrayToString =
       board[row][0].value +
       board[row][1].value +
