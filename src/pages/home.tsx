@@ -43,46 +43,46 @@ const Home: React.FC = () => {
 
   let boardDefault = [
     [
-      { value: "", disabled: false, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
     [
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
-      { value: "", disabled: true, color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
+      { value: "", color: "ioncol" },
     ],
   ];
   const [board, setBoard] = useState([...boardDefault]);
@@ -92,6 +92,7 @@ const Home: React.FC = () => {
   const [random, setRandom] = useState("");
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
+
   const [is, setIS] = useState(false);
   const [games, setGames] = useState([]);
   const [essais, setEssais] = useState([]);
@@ -121,7 +122,6 @@ const Home: React.FC = () => {
   const [isShow, setIsShow] = useState(false);
   const [str, setStr] = useState("");
   const [nbrTest, setNbrTest] = useState(0);
-  const [presentAlert] = useIonAlert();
 
 
   useEffect(() => {
@@ -138,67 +138,39 @@ const Home: React.FC = () => {
 
   const handleClick = (event: any) => {
     let currentMatrice = [...board];
-    if (row === 0) {
-      for (let i = 0; i < currentMatrice[0].length; i++) {
-        const el = currentMatrice[0][i];
-        if (i === col) {
-          el.value = event.target.innerText;
-        }
-      }
-    } else {
-      for (let index = 0; index < currentMatrice.length; index++) {
-        const element = currentMatrice[index];
-        if (index === row) {
-          for (let i = 0; i < element.length; i++) {
-            const el = element[i];
-            if (i === col) {
-              el.value = event.target.innerText;
-            }
-          }
-        }
-      }
+    currentMatrice[row][col].value = event.target.innerText;
+    if (col < 5) {
+      setCol((prev) => prev + 1);
     }
-    if (col < 4) {
-      setCol(col + 1);
-    }
-    currentMatrice[row][col].disabled = true;
-    currentMatrice[row][col < 4 ? col + 1 : col].disabled = false;
+
     setBoard(currentMatrice);
     boardDefault = currentMatrice;
     setPress(event.target.innerText);
   };
 
-  const Ionchange = (event: any) => {};
-
   const prev = () => {
-    if (col === 0) {
-      let copy = [...board];
-      copy[row - 1][4].value = "";
-      copy[row - 1][4].disabled = false;
-      setCol(4);
-      setRow(row - 1);
+    let copy = [...board];
+    if (col===5) {
+      copy[row][col-1].value = "";
+      setCol((prev) => prev-1);
+    }else{
+      copy[row][col-1].value = "";
+      setCol((prev) => prev-1);
       setBoard(copy);
-    } else {
-      let copy = [...board];
-      console.log(copy[row][col]);
-      copy[row][col - 1].value = "";
-      setCol(col - 1);
-      setBoard(copy);
-    }
+    }    
   };
+
   const nbre_caracteres = (lettre: string, mot: string) => {
-    console.log(mot);
     let mots = mot.split("");
     var nbre_de_fois_trouve = 0;
 
     for (var i = 0; i < mots.length; i++) {
-      if (lettre == mots[i]) nbre_de_fois_trouve++;
+      if (lettre === mots[i]) nbre_de_fois_trouve++;
     }
-    // console.log(nbre_de_fois_trouve) ;
     return nbre_de_fois_trouve;
   };
 
-  const compare = (event: any) => {
+  const compare = () => {
     let valid = false;
     
     let arrayToString =
@@ -207,12 +179,11 @@ const Home: React.FC = () => {
       board[row][2].value +
       board[row][3].value +
       board[row][4].value;
-    console.log(arrayToString, random);
 
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
       valid = true;
       let copyBoard = [...board];
-      // copyBoard[row - 1].forEach((col) => {
+
       copyBoard[row].forEach((col) => {
         col.color = "ionColGreen";
       });
@@ -247,18 +218,15 @@ const Home: React.FC = () => {
                       nb++;
                     }
                     if (nb > letterRepeatRandom) {
-                      // copyBoard[row - 1][i].color = "ionColRed";
                       copyBoard[row][i].color = "ionColRed";
                       setBoard(copyBoard);
                     }
                   }
 
                   if (nb <= letterRepeatRandom) {
-                    // copyBoard[row - 1][i].color = "ionColOrange";
                     copyBoard[row][i].color = "ionColOrange";
                     setBoard(copyBoard);
                   } else {
-                    // copyBoard[row - 1][i].color = "ionColRed";
                     copyBoard[row][i].color = "ionColRed";
                     setBoard(copyBoard);
                   }
@@ -267,7 +235,6 @@ const Home: React.FC = () => {
             }
           }
         } else {
-          // copyBoard[row - 1][i].color = "ionColRed";
           copyBoard[row][i].color = "ionColRed";
           setBoard(copyBoard);
         }
@@ -291,21 +258,24 @@ const Home: React.FC = () => {
     if (nbrTest < 5) {
       if (valid) {
         result = "Felicitations !!!!!";
-        setIsShow(true);
         setNewGame(true);
       } else {
         result = "Dommage, loose Vous pouvez reessayez encore";
       }
+      setIsShow(true);
     }
 
     setStr(result);
-    if (col === 4) {
+    if (col === 5) {
       setRow(row + 1);
       setCol(0);
     }
+
+
   };
 
-  const reset = (event: any) => {
+
+  const reset = () => {
     setBoard(boardDefault);
     setCol(0);
     setRow(0);
@@ -315,19 +285,23 @@ const Home: React.FC = () => {
     setNbrTest(0);
   };
 
-  console.log(isShow);
+  const Ionchange = () => {};
+
   return (
     <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Jouer !</IonTitle> 
+        </IonToolbar>
+      </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">A vous de jouer</IonTitle>
           </IonToolbar>
         </IonHeader>
-        {/* <h1 className="ioncol">Le mot à trouver est : {random}</h1> */}
-        {/* <IonButton color={"danger"} onClick={reset}>
-          <IonIcon className="keyboard-button" icon={refreshCircle} />
-        </IonButton> */}
+
+        <h1 className="ioncol">Bonne Chance !!! {random}</h1>
 
         <IonAlert
           isOpen={isShow}
@@ -362,6 +336,7 @@ const Home: React.FC = () => {
             : null}
         </IonGrid>
 
+        {/* clavier */}
         <div className="containerPartie">
           <IonButton
             onClick={compare}
@@ -372,12 +347,12 @@ const Home: React.FC = () => {
           </IonButton>
           <IonButton
             className=" keyboard-button deletePartie"
-            color="tertiary"
+            color="medium"
             onClick={reset}
           >
             {newGame ? "Nouvelle Partie" : "Recommencer la partie"}
           </IonButton>
-          <IonButton color={"danger"} onClick={prev} className="delete">
+          <IonButton color="light" onClick={prev} className="delete">
             <IonIcon
               size="small"
               className="keyboard-button delete"
