@@ -238,8 +238,6 @@ const Home: React.FC = () => {
       setRow(row + 1);
       setCol(0);
     }
-
-
   };
 
   const reset = () => {
@@ -332,7 +330,6 @@ const Home: React.FC = () => {
                     <IonButton
                       disabled={newGame ? true : false}
                       onClick={handleClick}
-                      // size="small"
                       color="warning"
                       className="keyboard-button annuler"
                     >
