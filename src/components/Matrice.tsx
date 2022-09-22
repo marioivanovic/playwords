@@ -51,12 +51,6 @@ export const Matrice = () => {
 
   const Ionchange = (event: any, index: number, i: number) => {
     let currentMatrice = [...matrice];
-    console.log(currentMatrice);
-    // console.log(matrice[index][i].value)
-    // matrice[index][i].value=event.detail.value;
-    // matrice[index][i].disabled=true;
-    // matrice[index][i+1].disabled=false;
-    // console.log(matrice[index][i].value)
   };
 
   return (

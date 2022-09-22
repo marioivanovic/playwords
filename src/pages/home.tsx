@@ -15,6 +15,7 @@ import {
   IonAlert,
 } from "@ionic/react";
 import "./home.css";
+import Keyboard from "./../components/keyboard";
 import data from "../Data.json";
 import { useEffect, useRef, useState } from "react";
 import "../components/keyboard.css";
@@ -39,6 +40,7 @@ const Home: React.FC = () => {
     }
     rows.push(cols);
   }
+
   let boardDefault = [
     [
       { value: "", color: "ioncol" },
@@ -90,11 +92,37 @@ const Home: React.FC = () => {
   const [random, setRandom] = useState("");
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
+
+  const [is, setIS] = useState(false);
+  const [games, setGames] = useState([]);
+  const [essais, setEssais] = useState([]);
+  const [words, setWords] = useState([]);
+
+  const gamer = {
+    games: games,
+    essais: essais,
+    words: words,
+  };
+
+  let saveGame = () => {
+    localStorage.setItem("games", JSON.stringify(gamer));
+    localStorage.setItem("essais", JSON.stringify(gamer));
+    localStorage.setItem("words", JSON.stringify(gamer));
+  };
+
+  function GetUser() {
+    var user: any = localStorage.getItem("pseudo");
+
+    return JSON.parse(user);
+  }
+
+  const [wordsFind, setWordsFind] = useState([]);
   const [isRefrech, setIsrefrech] = useState(false);
   const [newGame, setNewGame] = useState(false);
   const [isShow, setIsShow] = useState(false);
   const [str, setStr] = useState("");
   const [nbrTest, setNbrTest] = useState(0);
+
 
   useEffect(() => {
     randomValueFromArray();
@@ -114,6 +142,7 @@ const Home: React.FC = () => {
     if (col < 5) {
       setCol((prev) => prev + 1);
     }
+
     setBoard(currentMatrice);
     boardDefault = currentMatrice;
     setPress(event.target.innerText);
@@ -143,15 +172,18 @@ const Home: React.FC = () => {
 
   const compare = () => {
     let valid = false;
+    
     let arrayToString =
       board[row][0].value +
       board[row][1].value +
       board[row][2].value +
       board[row][3].value +
       board[row][4].value;
+
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
       valid = true;
       let copyBoard = [...board];
+
       copyBoard[row].forEach((col) => {
         col.color = "ionColGreen";
       });
@@ -242,6 +274,7 @@ const Home: React.FC = () => {
 
   };
 
+
   const reset = () => {
     setBoard(boardDefault);
     setCol(0);
@@ -258,16 +291,18 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 2</IonTitle> 
+          <IonTitle>Jouer !</IonTitle> 
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
+            <IonTitle size="large">A vous de jouer</IonTitle>
           </IonToolbar>
         </IonHeader>
+
         <h1 className="ioncol">Bonne Chance !!! {random}</h1>
+
         <IonAlert
           isOpen={isShow}
           onDidDismiss={() => setIsShow(false)}
@@ -277,8 +312,10 @@ const Home: React.FC = () => {
           buttons={["OK"]}
         />
 
-        {/* grid */}
         <IonGrid>
+          <IonButton color={"medium"} onClick={reset}>
+            <IonIcon className="keyboard-button" icon={refreshCircle} />
+          </IonButton>
           {board.length > 0
             ? board.map((row, index) => (
                 <IonRow className="ion-row" key={index} id={"id-" + index}>
@@ -332,7 +369,7 @@ const Home: React.FC = () => {
                     <IonButton
                       disabled={newGame ? true : false}
                       onClick={handleClick}
-                      // size="small"
+                      size="large"
                       color="warning"
                       className="keyboard-button annuler"
                     >
