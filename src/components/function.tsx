@@ -18,19 +18,8 @@ export const letterInWorl = (lettre: string, word: string) => {
 
 export const concatArrayValue = (row: any) => {
   let arrayToString = row[0].value + row[1].value + row[2].value + row[3].value + row[4].value;
-
   return arrayToString;
 };
-
-//   export const existInJsonData = (word: string, data) => {
-//     let response = false;
-
-//     if (word.includes(word)) {
-//         response = true;
-//     }
-//     return response;
-//   };
-
 
 export const compare = (
   board: any,
