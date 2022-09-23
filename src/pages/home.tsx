@@ -110,7 +110,9 @@ const Home: React.FC = () => {
 
   const handleClick = (event: any) => {
     let currentMatrice = [...board];
-    currentMatrice[row][col].value = event.target.innerText;
+    if (col<5) {
+      currentMatrice[row][col].value = event.target.innerText;
+    }
     if (col < 5) {
       setCol((prev) => prev + 1);
     }
@@ -125,7 +127,10 @@ const Home: React.FC = () => {
       copy[row][col-1].value = "";
       setCol((prev) => prev-1);
     }else{
-      copy[row][col-1].value = "";
+      if (col>0) {
+        
+        copy[row][col-1].value = "";
+      }
       setCol((prev) => prev-1);
       setBoard(copy);
     }    
