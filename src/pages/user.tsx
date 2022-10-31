@@ -10,20 +10,22 @@ import "./user.css";
 const User: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 3</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
+      <IonContent>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">User</IonTitle>
+            <IonTitle size="large">Play With Words </IonTitle>
           </IonToolbar>
         </IonHeader>
+        <IonTitle size="small">Bienvenue {GetStat().pseudo} </IonTitle>
       </IonContent>
     </IonPage>
   );
 };
+function GetStat() {
+  var user: any = localStorage.getItem("stat");
+  console.log(user);
+
+  return JSON.parse(user);
+}
 
 export default User;

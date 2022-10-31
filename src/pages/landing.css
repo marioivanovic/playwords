@@ -1,0 +1,39 @@
+ion-grid{
+    margin-top: 40px;
+}
+
+.legend{
+    height:40px;
+    width: 40px;
+    background: blue;
+}
+
+.legend-container{
+    display: flex;
+    margin: 5px;
+    align-items: center;
+}
+
+.legend-description{
+    margin-left: 10px;
+}
+
+.success{
+    background: #4AD66D;
+}
+
+.misplaced{
+    background: #FFB700;
+}
+
+.failed{
+    background: #DA1E37;
+}
+
+.btn{
+    margin-top: 50px;
+    margin-left: 35%;
+    width: 120px;
+    height: 50px;
+    border-radius: 15px;
+}

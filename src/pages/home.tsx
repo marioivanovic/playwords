@@ -15,6 +15,7 @@ import {
   IonAlert,
 } from "@ionic/react";
 import "./home.css";
+import Keyboard from "./../components/keyboard";
 import data from "../Data.json";
 import { useEffect, useRef, useState } from "react";
 import "../components/keyboard.css";
@@ -23,6 +24,7 @@ import { backspace, refreshCircle } from "ionicons/icons";
 import "../components/styles.css";
 import AlertIon from "../components/AlertIon";
 import ModalInfo from "../components/ModalInfo";
+import { Game, updateStorage } from "../utils/stats";
 
 const Home: React.FC = () => {
   const modal = useRef<HTMLIonModalElement>(null);
@@ -39,6 +41,7 @@ const Home: React.FC = () => {
     }
     rows.push(cols);
   }
+
   let boardDefault = [
     [
       { value: "", color: "ioncol" },
@@ -90,6 +93,25 @@ const Home: React.FC = () => {
   const [random, setRandom] = useState("");
   const [row, setRow] = useState(0);
   const [col, setCol] = useState(0);
+
+  const [is, setIS] = useState(false);
+  const [games, setGames] = useState([]);
+  const [essais, setEssais] = useState([]);
+  const [words, setWords] = useState([]);
+
+  const gamer = {
+    games: games,
+    essais: essais,
+    words: words,
+  };
+
+  let saveGame = () => {
+    localStorage.setItem("games", JSON.stringify(gamer));
+    localStorage.setItem("essais", JSON.stringify(gamer));
+    localStorage.setItem("words", JSON.stringify(gamer));
+  };
+
+  const [wordsFind, setWordsFind] = useState([]);
   const [isRefrech, setIsrefrech] = useState(false);
   const [newGame, setNewGame] = useState(false);
   const [isShow, setIsShow] = useState(false);
@@ -116,6 +138,7 @@ const Home: React.FC = () => {
     if (col < 5) {
       setCol((prev) => prev + 1);
     }
+
     setBoard(currentMatrice);
     boardDefault = currentMatrice;
     setPress(event.target.innerText);
@@ -150,15 +173,18 @@ const Home: React.FC = () => {
 
   const compare = () => {
     let valid = false;
+
     let arrayToString =
       board[row][0].value +
       board[row][1].value +
       board[row][2].value +
       board[row][3].value +
       board[row][4].value;
+
     if (arrayToString.toLocaleLowerCase() === random.toLocaleLowerCase()) {
       valid = true;
       let copyBoard = [...board];
+
       copyBoard[row].forEach((col) => {
         col.color = "ionColGreen";
       });
@@ -215,15 +241,24 @@ const Home: React.FC = () => {
         }
       }
     }
+    var essaisCount = nbrTest + 1;
+    var game = new Game({ essais: essaisCount, words: random });
+    setNbrTest(essaisCount);
 
-    setNbrTest(nbrTest + 1);
+    let statStorage: any = localStorage.getItem("stat");
+    let statParse: any = JSON.parse(statStorage);
+    let stats: any = statParse.stats;
+
+    stats.push(game);
+    updateStorage("stat", { stats: stats });
+
     let result = "";
 
     if (nbrTest === 5) {
       if (valid) {
         result = "Felicitations c'etait moins une !!!!!";
       } else {
-        result = "Dommage, loose, Vous avez perdu";
+        result = "Dommage, vous avez perdu, retentez votre chance !";
       }
       setIsShow(true);
       setIsrefrech(true);
@@ -269,10 +304,12 @@ const Home: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
+            <IonTitle size="large">A vous de jouer</IonTitle>
           </IonToolbar>
         </IonHeader>
+
         <h1 className="ioncol">Bonne Chance !!!</h1>
+
         <IonAlert
           isOpen={isShow}
           onDidDismiss={() => setIsShow(false)}
@@ -282,7 +319,6 @@ const Home: React.FC = () => {
           buttons={["OK"]}
         />
 
-        {/* grid */}
         <IonGrid>
           {board.length > 0
             ? board.map((row, index) => (
