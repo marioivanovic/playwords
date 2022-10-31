@@ -138,7 +138,9 @@ const Home: React.FC = () => {
 
   const handleClick = (event: any) => {
     let currentMatrice = [...board];
-    currentMatrice[row][col].value = event.target.innerText;
+    if (col < 5) {
+      currentMatrice[row][col].value = event.target.innerText;
+    }
     if (col < 5) {
       setCol((prev) => prev + 1);
     }
@@ -150,14 +152,19 @@ const Home: React.FC = () => {
 
   const prev = () => {
     let copy = [...board];
-    if (col===5) {
-      copy[row][col-1].value = "";
-      setCol((prev) => prev-1);
-    }else{
-      copy[row][col-1].value = "";
-      setCol((prev) => prev-1);
-      setBoard(copy);
-    }    
+    if (col === 5) {
+      copy[row][col - 1].value = "";
+      setCol((prev) => prev - 1);
+    } else {
+      if (col > 0) {
+        copy[row][col - 1].value = "";
+        setCol((prev) => prev - 1);
+        setBoard(copy);
+      }
+      if (col === 0) {
+        console.log("ici", col);
+      }
+    }
   };
 
   const nbre_caracteres = (lettre: string, mot: string) => {
@@ -246,7 +253,7 @@ const Home: React.FC = () => {
 
     if (nbrTest === 5) {
       if (valid) {
-        result = "Felicitations c'etait moin une !!!!!";
+        result = "Felicitations c'etait moins une !!!!!";
       } else {
         result = "Dommage, loose, Vous avez perdu";
       }
@@ -270,8 +277,6 @@ const Home: React.FC = () => {
       setRow(row + 1);
       setCol(0);
     }
-
-
   };
 
 
@@ -291,7 +296,8 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Jouer !</IonTitle> 
+
+          <IonTitle>Tab 2</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -369,7 +375,7 @@ const Home: React.FC = () => {
                     <IonButton
                       disabled={newGame ? true : false}
                       onClick={handleClick}
-                      size="large"
+
                       color="warning"
                       className="keyboard-button annuler"
                     >
