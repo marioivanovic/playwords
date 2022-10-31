@@ -17,10 +17,6 @@ export class Stat {
   }
 }
 
-// export function updateStorage(key: string, dataStorage: any) {
-//   let storage: any = localStorage.getItem("");
-//   localStorage.setItem(key, JSON.stringify(Object.assign(dataStorage)));
-// }
 export function updateStorage(key: string, dataStorage: any) {
   let storage: any = localStorage.getItem("stat");
   let obj: any = JSON.parse(storage);

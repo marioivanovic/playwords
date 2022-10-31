@@ -174,7 +174,7 @@ const Home: React.FC = () => {
 
   const compare = () => {
     let valid = false;
-    
+
     let arrayToString =
       board[row][0].value +
       board[row][1].value +
@@ -313,7 +313,8 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <h1 className="ioncol">Bonne Chance !!! {random}</h1>
+        <h1 className="ioncol">Bonne Chance !!!</h1>
+
 
         <IonAlert
           isOpen={isShow}
