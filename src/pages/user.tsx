@@ -13,7 +13,7 @@ const User: React.FC = () => {
       <IonContent>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Play With Words </IonTitle>
+            <IonTitle size="large">Play With Words !</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonTitle size="small">Bienvenue {GetStat().pseudo} </IonTitle>
