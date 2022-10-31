@@ -272,7 +272,7 @@ const Home: React.FC = () => {
             <IonTitle size="large">Tab 2</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <h1 className="ioncol">Bonne Chance !!! {random}</h1>
+        <h1 className="ioncol">Bonne Chance !!!</h1>
         <IonAlert
           isOpen={isShow}
           onDidDismiss={() => setIsShow(false)}
