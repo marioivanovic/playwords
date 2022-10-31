@@ -1,3 +1,4 @@
+
 import { IonButton, IonCol, IonContent, IonRow } from "@ionic/react";
 import { useState } from "react";
 import '../components/keyboard.css'
@@ -15,7 +16,6 @@ const Keyboard: React.FC = () => {
     ["B", "M", "N", "V", "C", "Z", "X"],
   ];
   const handleClick = (event:any)=>{
-    console.log(event.target.innerText);
     setPress(event.target.innerText);
   }
   return (
@@ -34,5 +34,3 @@ const Keyboard: React.FC = () => {
 };
 
 export default Keyboard;
-
-

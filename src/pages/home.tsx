@@ -118,6 +118,7 @@ const Home: React.FC = () => {
   const [str, setStr] = useState("");
   const [nbrTest, setNbrTest] = useState(0);
 
+
   useEffect(() => {
     randomValueFromArray();
   }, [isRefrech]);
@@ -256,7 +257,9 @@ const Home: React.FC = () => {
 
     if (nbrTest === 5) {
       if (valid) {
+
         result = "Felicitations c'etait moins une !!!!!";
+        
       } else {
         result = "Dommage, vous avez perdu, retentez votre chance !";
       }
@@ -282,6 +285,7 @@ const Home: React.FC = () => {
     }
   };
 
+
   const reset = () => {
     setBoard(boardDefault);
     setCol(0);
@@ -298,6 +302,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+
           <IonTitle>Tab 2</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -310,6 +315,7 @@ const Home: React.FC = () => {
 
         <h1 className="ioncol">Bonne Chance !!!</h1>
 
+
         <IonAlert
           isOpen={isShow}
           onDidDismiss={() => setIsShow(false)}
@@ -320,6 +326,10 @@ const Home: React.FC = () => {
         />
 
         <IonGrid>
+          <h1 className="ioncol">Le mot à trouver est : {random}</h1>
+          <IonButton color={"medium"} onClick={reset}>
+            <IonIcon className="keyboard-button" icon={refreshCircle} />
+          </IonButton>
           {board.length > 0
             ? board.map((row, index) => (
                 <IonRow className="ion-row" key={index} id={"id-" + index}>
@@ -373,6 +383,7 @@ const Home: React.FC = () => {
                     <IonButton
                       disabled={newGame ? true : false}
                       onClick={handleClick}
+
                       color="warning"
                       className="keyboard-button annuler"
                     >

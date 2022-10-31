@@ -1,8 +1,33 @@
 ion-button {
-    height: 2rem;
-    width: 2rem;
+    margin-bottom: 20px;
+    height: 60px;
+    width: 50px;
     border-radius: 0px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    
 }
+
+ion-grid{
+    padding:1em 0 1em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+
+ion-grid > ion-row{
+    background: #FFB700;
+    color: #fff;
+}
+
+.keyboard-button {
+    height: 60px;
+    width: 50px;
+}
+
 .compare {
     width: 5rem;
     transform: translateX(-50%);
@@ -11,7 +36,6 @@ ion-button {
 .compare2 {
     width: 5rem;
     height: 3rem;
-    /* transform: translateX(-50%); */
 }
  .delete {
     height: 3rem;
@@ -25,10 +49,7 @@ ion-button {
     display: flex;
     justify-content: center;
 }
-/* .annuler {
-    height: 3rem;
-    width: 3rem;
-} */
+
 .ioncol, .ionColGreen, .ionColOrange, .ionColRed {
     min-width: 3rem;
     min-height: 3rem;
