@@ -60,7 +60,9 @@ ion-grid > ion-row{
 }
 
 .ioncol{
-    background-color: #ca6702;
+    /* background-color: #ca6702;rosybrown */
+    /* background-color: rosybrown; goldenrod*/
+    background-color: goldenrod; 
 }
 
 .ion-row {
